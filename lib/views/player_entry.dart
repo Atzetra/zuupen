@@ -26,6 +26,7 @@ class PlayerEntry extends StatelessWidget {
         Material(
           elevation: 2,
           child: Container(
+            decoration: BoxDecoration(color: Theme.of(context).backgroundColor),
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 1),
             width: MediaQuery.of(context).size.width,
             child: Obx(

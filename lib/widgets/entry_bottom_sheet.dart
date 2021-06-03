@@ -17,7 +17,7 @@ class EntryBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(color: Colors.white),
+      decoration: BoxDecoration(color: Theme.of(context).backgroundColor),
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 60),
       margin: const EdgeInsets.all(10),
       child: Column(
@@ -38,9 +38,15 @@ class EntryBottomSheet extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 10),
                 child: Obx(
                   () => FlutterSwitch(
-                    inactiveIcon: const Icon(Icons.female),
+                    inactiveIcon: const Icon(
+                      Icons.female,
+                      color: Colors.pink,
+                    ),
                     inactiveColor: Colors.pink,
-                    activeIcon: const Icon(Icons.male),
+                    activeIcon: const Icon(
+                      Icons.male,
+                      color: Colors.blue,
+                    ),
                     value: _controller.genderStatus.value,
                     onToggle: (value) {
                       _controller.genderStatus.value = value;
