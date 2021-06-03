@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Zuupen',
       theme: AppTheme().themeData(context),
+      themeMode: ThemeMode.dark,
       initialRoute: LaunchScreen.id,
       getPages: [
         GetPage(
