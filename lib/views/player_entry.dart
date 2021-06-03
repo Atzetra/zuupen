@@ -3,7 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:zuupen/controllers/entry_controller.dart';
 import 'package:zuupen/controllers/player_controller.dart';
-import 'package:zuupen/models/player.dart';
+import 'package:zuupen/enums/enums.dart';
+import 'package:zuupen/views/pack_selection.dart';
 import 'package:zuupen/widgets/entry_bottom_sheet.dart';
 import 'package:zuupen/widgets/scaffold_base.dart';
 
@@ -66,10 +67,14 @@ class PlayerEntry extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            ElevatedButton.icon(
-                onPressed: () {},
-                icon: const FaIcon(FontAwesomeIcons.play),
-                label: const Text('Play')),
+            if (_playerCtrl.players.length >= 2)
+              ElevatedButton.icon(
+                  onPressed: () => Get.toNamed(PackSelection.id),
+                  icon: const FaIcon(FontAwesomeIcons.play),
+                  label: const Text('Play'))
+            else
+              const ElevatedButton(
+                  onPressed: null, child: Text('Not enough players')),
             TextButton.icon(
                 onPressed: () => Get.bottomSheet(
                       EntryBottomSheet(controller: _controller),

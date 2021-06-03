@@ -1,7 +1,4 @@
-enum Gender {
-  male,
-  female,
-}
+import 'package:zuupen/enums/enums.dart';
 
 class Player {
   final String name;
