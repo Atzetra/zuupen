@@ -12,9 +12,10 @@ enum GameCategory {
   downBad,
 }
 enum CardType {
-  truth,
-  dare,
-  challenge,
+  rule,
+  game,
   virus,
   custom,
+  caliente,
+  bottomsUp,
 }

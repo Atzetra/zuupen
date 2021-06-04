@@ -1,3 +1,0 @@
-class GettingStarted with Pack {
-  
-}

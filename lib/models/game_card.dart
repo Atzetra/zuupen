@@ -1,14 +1,16 @@
 import 'package:zuupen/enums/enums.dart';
 
 class GameCard {
+  late final int? id;
   final String firstLine;
-  final String secondLine;
+  final String? secondLine;
   final CardType cardType;
-  final Gender gender;
+  final int players;
 
   GameCard(
-      {required this.firstLine,
-      required this.secondLine,
+      {this.id,
+      required this.firstLine,
+      this.secondLine,
       required this.cardType,
-      required this.gender});
+      required this.players});
 }

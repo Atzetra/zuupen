@@ -1,9 +1,9 @@
 import 'package:zuupen/enums/enums.dart';
-import 'package:zuupen/models/game_card.dart';
 
 class Pack {
+  final String name;
   final GameCategory category;
-  final List<GameCard> cards;
+  final List cards;
 
-  Pack(this.category, this.cards);
+  Pack({required this.category, required this.cards, required this.name});
 }
