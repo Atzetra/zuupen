@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:zuupen/bindings/launch_bindings.dart';
-import 'package:zuupen/theme/app_theme.dart';
-import 'package:zuupen/views/launch_screen.dart';
-import 'package:zuupen/views/pack_selection.dart';
-import 'package:zuupen/views/player_entry.dart';
+
+import 'bindings/launch_bindings.dart';
+import 'theme/app_theme.dart';
+import 'views/launch_screen.dart';
+import 'views/pack_selection.dart';
+import 'views/player_entry.dart';
 
 void main() => runApp(const MyApp());
 

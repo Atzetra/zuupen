@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
-import 'package:zuupen/controllers/entry_controller.dart';
-import 'package:zuupen/controllers/player_controller.dart';
+
+import '../controllers/entry_controller.dart';
+import '../controllers/player_controller.dart';
 
 class PlayersBindings implements Bindings {
   @override

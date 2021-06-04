@@ -1,5 +1,5 @@
-import 'package:zuupen/enums/enums.dart';
-import 'package:zuupen/models/game_card.dart';
+import '../../enums/enums.dart';
+import '../../models/game_card.dart';
 
 List<GameCard> caliente = [
   GameCard(
@@ -122,7 +122,7 @@ List<GameCard> caliente = [
       cardType: CardType.game,
       players: 0),
   GameCard(
-      firstLine: '{{0}}, choose a player to motor boat {{1.female}}',
+      firstLine: '{{1}}, choose a player to motor boat {{0.female}}',
       cardType: CardType.rule,
       players: 2),
   GameCard(
@@ -159,7 +159,7 @@ List<GameCard> caliente = [
       players: 1),
   GameCard(
       firstLine:
-          '{{0}}, unhook the bra of {{1.female}}. 3 sips in case of refusal.',
+          '{{1}}, unhook the bra of {{0.female}}. 3 sips in case of refusal.',
       cardType: CardType.rule,
       players: 2),
   GameCard(

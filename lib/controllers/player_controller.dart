@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
-import 'package:zuupen/enums/enums.dart';
-import 'package:zuupen/models/player.dart';
+
+import '../enums/enums.dart';
+import '../models/player.dart';
 
 class PlayerController extends GetxController {
   final players = <Player>[].obs;

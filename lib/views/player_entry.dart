@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:zuupen/controllers/entry_controller.dart';
-import 'package:zuupen/controllers/player_controller.dart';
-import 'package:zuupen/enums/enums.dart';
-import 'package:zuupen/views/pack_selection.dart';
-import 'package:zuupen/widgets/entry_bottom_sheet.dart';
-import 'package:zuupen/widgets/scaffold_base.dart';
+
+import '../controllers/entry_controller.dart';
+import '../controllers/player_controller.dart';
+import '../enums/enums.dart';
+import '../widgets/entry_bottom_sheet.dart';
+import '../widgets/scaffold_base.dart';
+import 'pack_selection.dart';
 
 class PlayerEntry extends StatelessWidget {
   static const String id = 'PlayerEntry';

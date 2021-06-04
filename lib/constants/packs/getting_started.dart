@@ -1,5 +1,5 @@
-import 'package:zuupen/enums/enums.dart';
-import 'package:zuupen/models/game_card.dart';
+import '../../enums/enums.dart';
+import '../../models/game_card.dart';
 
 List<GameCard> gettingStarted = [
   GameCard(

@@ -1,4 +1,4 @@
-import 'package:zuupen/enums/enums.dart';
+import '../enums/enums.dart';
 
 class GameCard {
   late final int? id;

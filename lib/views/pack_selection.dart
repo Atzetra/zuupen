@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:zuupen/theme/text_styles.dart';
-import 'package:zuupen/widgets/scaffold_base.dart';
+
+import '../theme/text_styles.dart';
+import '../widgets/scaffold_base.dart';
 
 class PackSelection extends StatelessWidget {
   const PackSelection({Key? key}) : super(key: key);

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:zuupen/views/player_entry.dart';
-import 'package:zuupen/widgets/scaffold_base.dart';
+
+import '../widgets/scaffold_base.dart';
+import 'player_entry.dart';
 
 class LaunchScreen extends StatelessWidget {
   static const String id = 'LaunchScreen';

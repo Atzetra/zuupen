@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
-import 'package:zuupen/enums/enums.dart';
-import 'package:zuupen/models/pack.dart';
+
+import '../enums/enums.dart';
+import '../models/pack.dart';
 
 class PacksController extends GetxController {
   final selectedPacks = <Pack>[].obs;
