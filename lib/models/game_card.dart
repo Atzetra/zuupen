@@ -2,8 +2,8 @@ import 'package:zuupen/enums/enums.dart';
 
 class GameCard {
   late final int? id;
-  final String firstLine;
-  final String? secondLine;
+  String firstLine;
+  String? secondLine;
   final CardType cardType;
   final int players;
 
