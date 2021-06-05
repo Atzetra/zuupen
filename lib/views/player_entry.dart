@@ -16,7 +16,6 @@ class PlayerEntry extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final EntryController _controller = Get.find();
     final PlayerController _playerCtrl = Get.find();
 
     return ScaffoldBase(
@@ -78,7 +77,7 @@ class PlayerEntry extends StatelessWidget {
                   onPressed: null, child: Text('Not enough players')),
             TextButton.icon(
                 onPressed: () => Get.bottomSheet(
-                      EntryBottomSheet(controller: _controller),
+                      const EntryBottomSheet(),
                     ),
                 icon: const FaIcon(FontAwesomeIcons.plus),
                 label: const Text('Add Player')),

@@ -9,14 +9,12 @@ import '../controllers/player_controller.dart';
 class EntryBottomSheet extends StatelessWidget {
   const EntryBottomSheet({
     Key? key,
-    required EntryController controller,
-  })  : _controller = controller,
-        super(key: key);
-
-  final EntryController _controller;
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final EntryController _controller = Get.find();
+
     return Container(
       decoration: BoxDecoration(color: Theme.of(context).backgroundColor),
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 60),

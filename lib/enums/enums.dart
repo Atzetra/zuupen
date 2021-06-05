@@ -1,7 +1,6 @@
 enum Gender {
   male,
   female,
-  both,
 }
 
 enum GameCategory {
