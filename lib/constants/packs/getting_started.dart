@@ -214,4 +214,9 @@ Those who have watched porn together, drink 3 times. Drink 1 more if you did mor
       firstLine: 'The person who has been single the longest give out 3 sips',
       cardType: CardType.rule,
       players: 0),
+  GameCard(
+      firstLine:
+          "Drink 3 times if you think that the current song playing sucks. If there's no music, everyone drink 3 times.",
+      cardType: CardType.rule,
+      players: 0),
 ];
