@@ -33,33 +33,12 @@ class EntryBottomSheet extends StatelessWidget {
                   controller: _controller.textEditingController,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 10),
-                child: Obx(
-                  () => FlutterSwitch(
-                    inactiveIcon: const Icon(
-                      Icons.female,
-                      color: Colors.pink,
-                    ),
-                    inactiveColor: Colors.pink,
-                    activeIcon: const Icon(
-                      Icons.male,
-                      color: Colors.blue,
-                    ),
-                    value: _controller.genderStatus.value,
-                    onToggle: (value) {
-                      _controller.genderStatus.value = value;
-                    },
-                  ),
-                ),
-              ),
             ],
           ),
           ElevatedButton.icon(
             onPressed: () {
               Get.find<PlayerController>().addPlayer(
                 name: _controller.textEditingController.text,
-                genderValue: _controller.genderStatus.value,
               );
 
               Get.back();

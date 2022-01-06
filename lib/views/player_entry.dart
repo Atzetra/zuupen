@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
-import '../controllers/entry_controller.dart';
 import '../controllers/player_controller.dart';
-import '../enums/enums.dart';
 import '../widgets/entry_bottom_sheet.dart';
 import '../widgets/scaffold_base.dart';
 import 'pack_selection.dart';
@@ -51,11 +49,6 @@ class PlayerEntry extends StatelessWidget {
                                 children: [
                                   Text(_playerCtrl.players[index].name),
                                   const Spacer(),
-                                  if (_playerCtrl.players[index].gender ==
-                                      Gender.female)
-                                    const FaIcon(FontAwesomeIcons.female)
-                                  else
-                                    const FaIcon(FontAwesomeIcons.male),
                                   TextButton(
                                       onPressed: () {
                                         _playerCtrl.removePlayer(index);
