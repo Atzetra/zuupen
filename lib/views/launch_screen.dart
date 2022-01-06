@@ -5,7 +5,7 @@ import '../widgets/scaffold_base.dart';
 import 'player_entry.dart';
 
 class LaunchScreen extends StatelessWidget {
-  static const String id = 'LaunchScreen';
+  static const String id = '/LaunchScreen';
 
   const LaunchScreen({Key? key}) : super(key: key);
   @override

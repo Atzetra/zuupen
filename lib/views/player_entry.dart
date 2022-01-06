@@ -10,7 +10,7 @@ import '../widgets/scaffold_base.dart';
 import 'pack_selection.dart';
 
 class PlayerEntry extends StatelessWidget {
-  static const String id = 'PlayerEntry';
+  static const String id = '/PlayerEntry';
 
   const PlayerEntry({Key? key}) : super(key: key);
 
@@ -20,47 +20,57 @@ class PlayerEntry extends StatelessWidget {
 
     return ScaffoldBase(
       children: [
-        const Text(
-          'Add Players',
-          style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-        ),
         Material(
           elevation: 2,
           child: Container(
-            decoration: BoxDecoration(color: Theme.of(context).backgroundColor),
+            decoration: BoxDecoration(
+                color: Theme.of(context).backgroundColor,
+                borderRadius: BorderRadius.circular(20)),
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 1),
             width: MediaQuery.of(context).size.width,
-            child: Obx(
-              () => _playerCtrl.players.isEmpty
-                  ? const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10.0),
-                      child: Text('No Players Yet'),
-                    )
-                  : ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: _playerCtrl.players.length,
-                      itemBuilder: (context, index) {
-                        return Row(
-                          children: [
-                            Text(_playerCtrl.players[index].name),
-                            const Spacer(),
-                            if (_playerCtrl.players[index].gender ==
-                                Gender.female)
-                              const FaIcon(FontAwesomeIcons.female)
-                            else
-                              const FaIcon(FontAwesomeIcons.male),
-                            TextButton(
-                                onPressed: () {
-                                  _playerCtrl.removePlayer(index);
-                                },
-                                child: const Icon(
-                                  Icons.close,
-                                  color: Colors.red,
-                                )),
-                          ],
-                        );
-                      },
-                    ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Add Players',
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                  ),
+                  Obx(
+                    () => _playerCtrl.players.isEmpty
+                        ? const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 10.0),
+                            child: Text('No Players Yet'),
+                          )
+                        : ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: _playerCtrl.players.length,
+                            itemBuilder: (context, index) {
+                              return Row(
+                                children: [
+                                  Text(_playerCtrl.players[index].name),
+                                  const Spacer(),
+                                  if (_playerCtrl.players[index].gender ==
+                                      Gender.female)
+                                    const FaIcon(FontAwesomeIcons.female)
+                                  else
+                                    const FaIcon(FontAwesomeIcons.male),
+                                  TextButton(
+                                      onPressed: () {
+                                        _playerCtrl.removePlayer(index);
+                                      },
+                                      child: const Icon(
+                                        Icons.close,
+                                        color: Colors.red,
+                                      )),
+                                ],
+                              );
+                            },
+                          ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

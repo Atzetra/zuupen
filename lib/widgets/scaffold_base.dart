@@ -14,7 +14,7 @@ class ScaffoldBase extends StatelessWidget {
       body: SafeArea(
         child: Center(
           child: SizedBox(
-            width: MediaQuery.of(context).size.width * 0.8,
+            width: MediaQuery.of(context).size.width * 0.9,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,

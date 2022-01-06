@@ -7,7 +7,7 @@ import '../widgets/scaffold_base.dart';
 class PackSelection extends StatelessWidget {
   const PackSelection({Key? key}) : super(key: key);
 
-  static const String id = 'PackSelection';
+  static const String id = '/PackSelection';
 
   @override
   Widget build(BuildContext context) {
