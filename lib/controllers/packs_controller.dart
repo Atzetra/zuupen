@@ -8,14 +8,15 @@ class PacksController extends GetxController {
   final selectedPacks = <Pack>[].obs;
   final allPacks = <Pack>[
     Pack(category: GameCategory.gettingStarted, cards: gettingStarted),
-    Pack(category: GameCategory.caliente, cards: caliente),
+    // TODO: Implement other card packs
+    // Pack(category: GameCategory.caliente, cards: caliente),
   ].obs;
   final toggledPacks = <GameCategory, bool>{
     GameCategory.gettingStarted: true,
-    GameCategory.raisingTheStakes: false,
-    GameCategory.noSecrets: false,
-    GameCategory.caliente: false,
-    GameCategory.downBad: false,
+    // GameCategory.raisingTheStakes: false,
+    // GameCategory.noSecrets: false,
+    // GameCategory.caliente: false,
+    // GameCategory.downBad: false,
   }.obs;
 
   void togglePack(GameCategory category) {
