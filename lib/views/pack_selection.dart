@@ -11,8 +11,8 @@ class PackSelection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldBase(children: [
-      const Text(
+    return const ScaffoldBase(children: [
+      Text(
         'Select decks',
         style: CustomTextStyles.header,
       ),
