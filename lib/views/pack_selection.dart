@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:zuupen/controllers/cards_controller.dart';
 import 'package:zuupen/controllers/packs_controller.dart';
 
 import '../enums/enums.dart';
@@ -14,6 +15,8 @@ class PackSelection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final CardsController _cardsController = Get.find<CardsController>();
+
     return ScaffoldBase(
       children: [
         const Text(
@@ -37,7 +40,9 @@ class PackSelection extends StatelessWidget {
           height: 10,
         ),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            _cardsController.cardPopulator();
+          },
           child: Text('Play'),
           style: ElevatedButton.styleFrom(
             minimumSize: Size.fromHeight(50),

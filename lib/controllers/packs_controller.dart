@@ -5,7 +5,9 @@ import '../enums/enums.dart';
 import '../models/pack.dart';
 
 class PacksController extends GetxController {
-  final selectedPacks = <Pack>[].obs;
+  final selectedPacks = <Pack>[
+    Pack(category: GameCategory.gettingStarted, cards: gettingStarted),
+  ].obs;
   final allPacks = <Pack>[
     Pack(category: GameCategory.gettingStarted, cards: gettingStarted),
     // TODO: Implement other card packs
