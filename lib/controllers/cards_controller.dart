@@ -110,17 +110,15 @@ class CardsController extends GetxController {
   void cardSelector() {
     print('_pickBuffer before cardSelector: ' + _pickBuffer.length.toString());
     // 40
-    _pickBuffer.addAll((_ruleCards.toList()..shuffle()).take(41));
-
-// 6
+    _pickBuffer.addAll((_ruleCards.toList()..shuffle()).take(40));
+    // 6
     _pickBuffer.addAll((_gameCards.toList()..shuffle()).take(6));
-
-// 2
+    // 2
     _pickBuffer.addAll((_bottomsUpCards.toList()..shuffle()).take(2));
 
     _pickBuffer.shuffle();
 
-// 5
+    // 5
     _virusPlacer(
       (_virusCards.toList()..shuffle()).take(5).toList(),
     );
