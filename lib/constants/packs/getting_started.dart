@@ -70,14 +70,18 @@ List<GameCard> gettingStarted = [
       cardType: CardType.game,
       players: 1,
       elements: 0),
-  GameCard(firstLine: '''
-{{0}}, name as many people as you can that {{1}} has slept with, without being in
- a serious relationship and hand out as many sips.
-  You can stop whenever you want, but you lose and have to drink 4 sips if you
-   make a mistake.''', cardType: CardType.rule, players: 2, elements: 0),
-  GameCard(firstLine: '''
-Those who have watched porn together, drink {[0]} time. Drink 1 more if you did more
- than watch...''', cardType: CardType.rule, players: 0, elements: 0),
+  GameCard(
+      firstLine:
+          "{{0}}, name as many people as you can that {{1}} has slept with, without being in a serious relationship and hand out as many sips. You can stop whenever you want, but you lose and have to drink 4 sips if you make a mistake.",
+      cardType: CardType.rule,
+      players: 2,
+      elements: 0),
+  GameCard(
+      firstLine:
+          'Those who have watched porn together, drink {[0]} time. Drink 1 more if you did more than watch...',
+      cardType: CardType.rule,
+      players: 0,
+      elements: 1),
   GameCard(
       firstLine: 'Ladies, {{drink}}!',
       cardType: CardType.rule,
@@ -269,15 +273,21 @@ Those who have watched porn together, drink {[0]} time. Drink 1 more if you did 
           "Drink {[0]} time if you think that the current song playing sucks. If there's no music, everyone drink {[0]} time.",
       cardType: CardType.rule,
       players: 0,
-      elements: 0),
+      elements: 1),
   GameCard(
       firstLine: 'If you drank before coming here, drink {[0]} time.',
       cardType: CardType.rule,
       players: 0,
       elements: 1),
   GameCard(
-      firstLine: 'People with an iPhone, {drink}.',
+      firstLine: 'People with an iPhone, {{drink}}.',
       cardType: CardType.rule,
       players: 0,
       elements: 1),
+  GameCard(
+      firstLine:
+          'Down your drink if you lost your virginity to someone in this room.',
+      cardType: CardType.bottomsUp,
+      players: 0,
+      elements: 0),
 ];

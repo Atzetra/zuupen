@@ -14,7 +14,9 @@ class CardsController extends GetxController {
   final PacksController _packsController = Get.find<PacksController>();
 
   final _cards = <GameCard>[];
-  final _cloneCards = <GameCard>[];
+  final _pickBuffer = <GameCard>[];
+  final _finalCards = <GameCard>[];
+  List<GameCard> get finalCards => _finalCards;
   final _ruleCards = <GameCard>[];
   final _virusCards = <GameCard>[];
   final _bottomsUpCards = <GameCard>[];
@@ -25,25 +27,20 @@ class CardsController extends GetxController {
 
   @override
   void onInit() {
+    cardSeparator();
     cardSelector();
+    cardPopulator();
+    // for (var _card in _finalCards) {
+    //   print(_card.firstLine);
+    // }
     super.onInit();
   }
 
-  void cardSelector() {
-    cardPopulator();
-    cardSeparator();
-  }
-
   void cardPopulator() {
-    // Add all selected decks to card pile
-    for (var _pack in _packsController.selectedPacks) {
-      _cards.addAll(allPacks[_pack]!);
-    }
-
     // Get around the FUCKING annoying thing that shallow object copy isn't a
     // thing in Dart.
-    for (var _element in _cards) {
-      _cloneCards.add(_element.clone());
+    for (var _card in _pickBuffer) {
+      _finalCards.add(_card.clone());
     }
 
     // Add names
@@ -52,7 +49,7 @@ class CardsController extends GetxController {
     }
 
     // Get names into the decks
-    for (GameCard _card in _cloneCards) {
+    for (var _card in _finalCards) {
       _card.firstLine =
           ruleParser(_card.firstLine, _card.players, _card.elements);
       _card.firstLine = _card.firstLine.capitalizer();
@@ -60,7 +57,14 @@ class CardsController extends GetxController {
   }
 
   void cardSeparator() {
-    for (var _card in _cloneCards) {
+    // Add all selected decks to card pile
+    for (var _pack in _packsController.selectedPacks) {
+      _cards.addAll(allPacks[_pack]!);
+      _cards.removeWhere(
+          (element) => element.players > _playerController.players.length);
+    }
+
+    for (var _card in _cards) {
       switch (_card.cardType) {
         case CardType.rule:
           _ruleCards.add(_card);
@@ -78,24 +82,66 @@ class CardsController extends GetxController {
           break;
       }
     }
-    print('--------------------Rulecards-------------------------');
-    _ruleCards.forEach((element) {
-      print(element.firstLine);
-    });
-    print('---------------------Bottoms----------------------------');
-    _bottomsUpCards.forEach((element) {
-      print(element.firstLine);
-    });
-    print(
-        '--------------------------Gamecard----------------------------------');
-    _gameCards.forEach((element) {
-      print(element.firstLine);
-    });
-    print(
-        '----------------------------------Virus--------------------------------------');
-    _virusCards.forEach((element) {
-      print(element.firstLine);
-    });
+
+    // print('--------------------Rulecards-------------------------');
+    // print(_ruleCards.length);
+    // _ruleCards.forEach((element) {
+    //   print(element.firstLine);
+    // });
+    // print('---------------------Bottoms----------------------------');
+    // print(_bottomsUpCards.length);
+    // _bottomsUpCards.forEach((element) {
+    //   print(element.firstLine);
+    // });
+    // print(
+    //     '--------------------------Gamecard----------------------------------');
+    // print(_gameCards.length);
+    // _gameCards.forEach((element) {
+    //   print(element.firstLine);
+    // });
+    // print(
+    //     '----------------------------------Virus--------------------------------------');
+    // print(_virusCards.length);
+    // _virusCards.forEach((element) {
+    //   print(element.firstLine);
+    // });
+  }
+
+  void cardSelector() {
+    print('_pickBuffer before cardSelector: ' + _pickBuffer.length.toString());
+    // 40
+    _pickBuffer.addAll((_ruleCards.toList()..shuffle()).take(41));
+
+// 6
+    _pickBuffer.addAll((_gameCards.toList()..shuffle()).take(6));
+
+// 2
+    _pickBuffer.addAll((_bottomsUpCards.toList()..shuffle()).take(2));
+
+    _pickBuffer.shuffle();
+
+// 5
+    _virusPlacer(
+      (_virusCards.toList()..shuffle()).take(5).toList(),
+    );
+  }
+
+  void _virusPlacer(List<GameCard> _virusses) {
+    final _random = Random();
+    for (var _card in _virusses) {
+      final _firstInsertIndex = _random.nextInt(_pickBuffer.length - 1);
+      final _secondInsertIndex = _firstInsertIndex +
+          1 +
+          _random.nextInt(_pickBuffer.length - _firstInsertIndex);
+      final _virusEnd = GameCard(
+          firstLine: _card.secondLine!,
+          cardType: CardType.virus,
+          players: 0,
+          elements: 0);
+      _pickBuffer
+        ..insert(_firstInsertIndex, _card)
+        ..insert(_secondInsertIndex, _virusEnd);
+    }
   }
 
   //String parser

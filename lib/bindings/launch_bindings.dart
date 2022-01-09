@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:zuupen/controllers/cards_controller.dart';
+import 'package:zuupen/controllers/game_controller.dart';
 import 'package:zuupen/controllers/packs_controller.dart';
 
 import '../controllers/entry_controller.dart';
@@ -24,5 +25,6 @@ class GameScreenBindings implements Bindings {
   @override
   void dependencies() {
     Get.put<CardsController>(CardsController());
+    Get.put<GameController>(GameController());
   }
 }

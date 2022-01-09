@@ -19,7 +19,7 @@ class PlayerEntry extends StatelessWidget {
     return ScaffoldBase(
       children: [
         Material(
-          elevation: 2,
+          borderRadius: BorderRadius.circular(20),
           child: Container(
             decoration: BoxDecoration(
                 color: Theme.of(context).backgroundColor,

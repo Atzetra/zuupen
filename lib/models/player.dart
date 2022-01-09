@@ -1,5 +1,3 @@
-import '../enums/enums.dart';
-
 class Player {
   final String name;
 

@@ -17,7 +17,7 @@ class PacksController extends GetxController {
   @override
   void onInit() {
     setDefaults();
-    print(allGamePacks);
+    // print(allGamePacks);
     super.onInit();
   }
 
@@ -32,6 +32,6 @@ class PacksController extends GetxController {
       selectedPacks.removeWhere((element) => element == category);
     }
     toggledPacks.update(category, (value) => !value);
-    print(selectedPacks);
+    // print(selectedPacks);
   }
 }

@@ -4,11 +4,11 @@ import '../models/player.dart';
 
 class PlayerController extends GetxController {
   final players = <Player>[
-    Player(name: 'Enzo'),
-    Player(name: 'Angela'),
-    Player(name: 'Quinty'),
-    Player(name: 'Marlies'),
-    Player(name: 'Ilse'),
+    Player(name: 'Jaden'),
+    Player(name: 'Fiona'),
+    Player(name: 'Tammy'),
+    Player(name: 'Cassia'),
+    Player(name: 'Jared'),
   ].obs;
 
   void addPlayer({required String name}) {
