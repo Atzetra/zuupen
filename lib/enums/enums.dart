@@ -15,6 +15,5 @@ enum CardType {
   game,
   virus,
   custom,
-  caliente,
   bottomsUp,
 }

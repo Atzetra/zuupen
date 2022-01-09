@@ -8,9 +8,21 @@ import '../controllers/player_controller.dart';
 class PlayersBindings implements Bindings {
   @override
   void dependencies() {
-    Get.put<PlayerController>(PlayerController(), permanent: true);
+    Get.put<PlayerController>(PlayerController());
     Get.put<EntryController>(EntryController());
-    Get.put<PacksController>(PacksController(), permanent: true);
+  }
+}
+
+class PacksBindings implements Bindings {
+  @override
+  void dependencies() {
+    Get.put<PacksController>(PacksController());
+  }
+}
+
+class GameScreenBindings implements Bindings {
+  @override
+  void dependencies() {
     Get.put<CardsController>(CardsController());
   }
 }

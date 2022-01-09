@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:zuupen/views/game_screen.dart';
 
 import 'bindings/launch_bindings.dart';
 import 'theme/app_theme.dart';
@@ -25,7 +26,14 @@ class MyApp extends StatelessWidget {
             name: PlayerEntry.id,
             binding: PlayersBindings(),
             page: () => const PlayerEntry()),
-        GetPage(name: PackSelection.id, page: () => const PackSelection()),
+        GetPage(
+            name: PackSelection.id,
+            binding: PacksBindings(),
+            page: () => const PackSelection()),
+        GetPage(
+            name: GameScreen.id,
+            binding: GameScreenBindings(),
+            page: () => const GameScreen()),
       ],
     );
   }

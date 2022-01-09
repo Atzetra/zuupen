@@ -15,7 +15,7 @@ List<GameCard> gettingStarted = [
       elements: 1),
   GameCard(
       firstLine:
-          'For or against calling your dog "Barack"? Everyone vote at the same time, losers drink {[0]} times.',
+          'For or against calling your dog "Barack"? Everyone vote at the same time, losers drink {[0]} time.',
       cardType: CardType.game,
       players: 0,
       elements: 1),
@@ -23,7 +23,7 @@ List<GameCard> gettingStarted = [
       firstLine: 'Anyone who is shorter than {{0}}, {{drink}}.',
       cardType: CardType.rule,
       players: 1,
-      elements: 0),
+      elements: 1),
   GameCard(
       firstLine: '{{0}}, give out as many sips as {{1}} has good qualities.',
       cardType: CardType.rule,
@@ -34,7 +34,7 @@ List<GameCard> gettingStarted = [
           "Insensitives, {{drink}} if you've said someone is ugly in their face.",
       cardType: CardType.rule,
       players: 0,
-      elements: 0),
+      elements: 1),
   GameCard(
       firstLine: 'The person with the fullest glass drinks 4 times. Catch up!',
       cardType: CardType.rule,
@@ -82,7 +82,7 @@ Those who have watched porn together, drink {[0]} time. Drink 1 more if you did 
       firstLine: 'Ladies, {{drink}}!',
       cardType: CardType.rule,
       players: 0,
-      elements: 0),
+      elements: 1),
   GameCard(
       firstLine: '''
 {{0}} give a dare to {{1}}. If she or he completes it, she or he can give out {[0]} sips.''',
@@ -96,16 +96,16 @@ Those who have watched porn together, drink {[0]} time. Drink 1 more if you did 
       elements: 1),
   GameCard(
       firstLine:
-          '"Famous criminals", first person to repeat themselves or can\'t think of anything drinks 3 times. {{0}}. you start.',
+          '"Famous criminals", first person to repeat themselves or can\'t think of anything drinks {[0]} time. {{0}}. you start.',
       cardType: CardType.game,
       players: 1,
-      elements: 0),
+      elements: 1),
   GameCard(
       firstLine:
           '{{0}}, make up your mind: Who is the worst cook, {{1}} or {{2}}? Decided? Good, now {{3}} can {{drink}}.',
       cardType: CardType.rule,
       players: 4,
-      elements: 0),
+      elements: 1),
   GameCard(
       firstLine:
           'Girls drink as many sips as there are handsome guys in the room.',
@@ -114,7 +114,7 @@ Those who have watched porn together, drink {[0]} time. Drink 1 more if you did 
       elements: 0),
   GameCard(
       firstLine:
-          '"Manual jobs", the first to run out of jobs drinks {[0]} times. {{0}} starts.',
+          '"Manual jobs", the first to run out of jobs drinks {[0]} time. {{0}} starts.',
       cardType: CardType.game,
       players: 1,
       elements: 1),
@@ -140,17 +140,17 @@ Those who have watched porn together, drink {[0]} time. Drink 1 more if you did 
           "Famous ones, {{drink}} if you've ever had an article written about you in a newspaper.",
       cardType: CardType.rule,
       players: 0,
-      elements: 0),
+      elements: 1),
   GameCard(
       firstLine: "{{drink}} if you've ever masturbated at work.",
       cardType: CardType.rule,
       players: 0,
-      elements: 0),
+      elements: 1),
   GameCard(
       firstLine: 'Guitar players, {{drink}}',
       cardType: CardType.rule,
       players: 0,
-      elements: 0),
+      elements: 1),
   GameCard(
       firstLine: '{{0}} give out as many sips as single people playing.',
       cardType: CardType.rule,
@@ -158,7 +158,7 @@ Those who have watched porn together, drink {[0]} time. Drink 1 more if you did 
       elements: 0),
   GameCard(
       firstLine:
-          '"Something red and white", first person to repeat or can\'t think of anything drink {[0]} times. {{0}} starts.',
+          '"Something red and white", first person to repeat or can\'t think of anything drinks {[0]} time. {{0}} starts.',
       cardType: CardType.game,
       players: 1,
       elements: 1),
@@ -167,25 +167,25 @@ Those who have watched porn together, drink {[0]} time. Drink 1 more if you did 
           'The player who had the most relationships between {{0}} and {{1}} {{drink}}.',
       cardType: CardType.rule,
       players: 2,
-      elements: 0),
+      elements: 1),
   GameCard(
       firstLine:
           '{{0}} make up your mind: Who would be the first to go run naked in the snow, {{1}} or {{2}}? Chosen one {{drink}}.',
       cardType: CardType.rule,
       players: 3,
-      elements: 0),
+      elements: 1),
   GameCard(
       firstLine:
           '{{0}}, make up your mind: Who do you think would hesitate more between a fast-food meal and a salad? {{1}} or {{2}}? This person, {{drink}}.',
       cardType: CardType.rule,
       players: 3,
-      elements: 0),
+      elements: 1),
   GameCard(
       firstLine:
           '{{0}}, make up your mind: Who knows Disney songs the best? {{1}} or {{2}}? This person {{drink}}.',
       cardType: CardType.rule,
       players: 3,
-      elements: 0),
+      elements: 1),
   GameCard(
       firstLine: "Give out 2 sips if you've ever given someone a bikini wax.",
       cardType: CardType.rule,
@@ -207,7 +207,7 @@ Those who have watched porn together, drink {[0]} time. Drink 1 more if you did 
           'The person to have masturbated the most times this week, {{drink}}.',
       cardType: CardType.rule,
       players: 0,
-      elements: 0),
+      elements: 1),
   GameCard(
       firstLine:
           'Hands up! Last person with their hands in the air drinks 4 times.',
@@ -221,7 +221,7 @@ Those who have watched porn together, drink {[0]} time. Drink 1 more if you did 
       elements: 1),
   GameCard(
       firstLine:
-          '{{0}} is upsetman! Each time upsetman smiles or laughs, he/she drinks 2 time.',
+          '{{0}} is upsetman! Each time upsetman smiles or laughs, he/she drinks 2 timeguy.',
       secondLine: 'Upsetman can laugh again!',
       cardType: CardType.virus,
       players: 1,
@@ -249,10 +249,10 @@ Those who have watched porn together, drink {[0]} time. Drink 1 more if you did 
       elements: 0),
   GameCard(
       firstLine:
-          'Around the room, name someone who must take {[0]} sip. {{0}} you start.',
+          'Around the room, name someone who must drink {[0]} time. {{0}} you start.',
       cardType: CardType.game,
       players: 1,
-      elements: 0),
+      elements: 1),
   GameCard(
       firstLine:
           "{{0}}, if your feet are smaller than {{1}}'s, you drink {[0]} time. Otherwise give out {[1]} sip.",
@@ -263,10 +263,10 @@ Those who have watched porn together, drink {[0]} time. Drink 1 more if you did 
       firstLine: 'The person who has been single the longest {{drink}}',
       cardType: CardType.rule,
       players: 0,
-      elements: 0),
+      elements: 1),
   GameCard(
       firstLine:
-          "Drink {[0]} time if you think that the current song playing sucks. If there's no music, everyone drink {[0]} times.",
+          "Drink {[0]} time if you think that the current song playing sucks. If there's no music, everyone drink {[0]} time.",
       cardType: CardType.rule,
       players: 0,
       elements: 0),
