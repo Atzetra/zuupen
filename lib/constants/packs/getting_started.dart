@@ -270,4 +270,14 @@ Those who have watched porn together, drink {[0]} time. Drink 1 more if you did 
       cardType: CardType.rule,
       players: 0,
       elements: 0),
+  GameCard(
+      firstLine: 'If you drank before coming here, drink {[0]} time.',
+      cardType: CardType.rule,
+      players: 0,
+      elements: 1),
+  GameCard(
+      firstLine: 'People with an iPhone, {drink}.',
+      cardType: CardType.rule,
+      players: 0,
+      elements: 1),
 ];
