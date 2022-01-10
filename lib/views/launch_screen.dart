@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import '../widgets/scaffold_base.dart';
 import 'player_entry.dart';
@@ -21,14 +23,47 @@ class LaunchScreen extends StatelessWidget {
         ),
         SizedBox(
           width: double.maxFinite,
-          child: ElevatedButton(
-            onPressed: () {
-              Get.toNamed(PlayerEntry.id);
-            },
-            child: const Text('Play'),
+          child: Row(
+            children: [
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
+                    Get.toNamed(PlayerEntry.id);
+                  },
+                  child: const Text('Play'),
+                ),
+              ),
+              FutureBuilder(
+                future: getInfo(),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  return IconButton(
+                    onPressed: () => showAboutDialog(
+                        context: context,
+                        applicationVersion: snapshot.data,
+                        applicationLegalese: '© Enzo Sastrokarijo',
+                        applicationIcon:
+                            const FaIcon(FontAwesomeIcons.wineGlass),
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 8),
+                            child: Text(
+                              'I am not responsible for any harm caused by using this app. Picolo can suck my dick by using subscriptions while I already paid for the full version. My own version is better anyways.',
+                            ),
+                          )
+                        ]),
+                    icon: const Icon(Icons.info_outline),
+                  );
+                },
+              ),
+            ],
           ),
         ),
       ],
     );
+  }
+
+  Future<String> getInfo() async {
+    final _packageInfo = await PackageInfo.fromPlatform();
+    return _packageInfo.version;
   }
 }
