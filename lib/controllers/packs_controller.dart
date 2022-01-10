@@ -1,23 +1,23 @@
 import 'package:get/get.dart';
-import 'package:zuupen/constants/packs/card_packs.dart';
 
 import '../enums/enums.dart';
 
 class PacksController extends GetxController {
-  final List<GameCategory> selectedPacks = [];
-  final allGamePacks = allPacks.keys.toList();
-  bool get isEmpty => _emptyChecker();
-  final toggledPacks = <GameCategory, bool>{
+  final List<GameCategory> _selectedPacks = [];
+  final _toggledPacks = <GameCategory, bool>{
     GameCategory.gettingStarted: false,
     // GameCategory.raisingTheStakes: false,
     // GameCategory.noSecrets: false,
     // GameCategory.caliente: false,
     // GameCategory.downBad: false,
   }.obs;
+  List<GameCategory> get selectedPacks => _selectedPacks;
+  bool get isEmpty => _emptyChecker();
+  Map<GameCategory, bool> get toggledPacks => _toggledPacks;
 
   @override
   void onInit() {
-    setDefaults();
+    _setDefaults();
     // print(allGamePacks);
     super.onInit();
   }
@@ -30,11 +30,13 @@ class PacksController extends GetxController {
     }
   }
 
-  void setDefaults() {
-    togglePack(GameCategory.gettingStarted);
+  void _setDefaults() {
+    _togglePack(GameCategory.gettingStarted);
   }
 
-  void togglePack(GameCategory category) {
+  void togglePack(GameCategory _category) => _togglePack(_category);
+
+  void _togglePack(GameCategory category) {
     if (toggledPacks[category] == false) {
       selectedPacks.add(category);
     } else if (toggledPacks[category] == true) {
