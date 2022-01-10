@@ -1,15 +1,17 @@
 name: zuupen
 description: Een niet betaalde zuip app.
 
-publish_to: 'none'
+publish_to: "none"
 
-version: 0.1.2+1
+version: 0.3.1+1
 
 environment:
   sdk: ">=2.15.1 <3.0.0"
 
 dependencies:
+  cloud_firestore: ^3.1.6
   cupertino_icons: ^1.0.2
+  firebase_core: ^1.11.0
   flutter:
     sdk: flutter
   font_awesome_flutter: ^9.0.0

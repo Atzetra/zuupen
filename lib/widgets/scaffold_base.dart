@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:zuupen/views/feedback_screen.dart';
 
 class ScaffoldBase extends StatelessWidget {
   final List<Widget>? children;
@@ -17,16 +19,35 @@ class ScaffoldBase extends StatelessWidget {
     return Scaffold(
       backgroundColor: backgroundColor,
       body: SafeArea(
-        child: Center(
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width * 0.9,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: crossAxisAlignment,
-              mainAxisSize: MainAxisSize.min,
-              children: children!,
+        child: Stack(
+          children: [
+            PopupMenuButton(
+              itemBuilder: (_) => <PopupMenuItem>[
+                PopupMenuItem(
+                  child: TextButton(
+                    onPressed: () {
+                      Get.toNamed(FeedbackScreen.id);
+                    },
+                    child: const Text(
+                      'Send Feedback',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
+            Center(
+              child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.9,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: crossAxisAlignment,
+                  mainAxisSize: MainAxisSize.min,
+                  children: children!,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
