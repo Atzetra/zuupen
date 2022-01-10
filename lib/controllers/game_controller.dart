@@ -5,6 +5,7 @@ import 'package:zuupen/controllers/cards_controller.dart';
 import 'package:zuupen/enums/enums.dart';
 import 'package:zuupen/models/game_card.dart';
 import 'package:zuupen/views/end_screen.dart';
+import 'package:zuupen/views/launch_screen.dart';
 import 'package:zuupen/views/player_entry.dart';
 
 class GameController extends GetxController {
@@ -62,7 +63,7 @@ class GameController extends GetxController {
           TextButton(
             onPressed: () {
               _action = true;
-              Get.offAllNamed(PlayerEntry.id);
+              Get.offAllNamed(LaunchScreen.id);
             },
             child: const Text('Yes'),
           ),
