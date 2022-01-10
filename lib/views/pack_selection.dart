@@ -36,17 +36,37 @@ class PackSelection extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        ElevatedButton(
-          onPressed: () {
-            Get.toNamed(GameScreen.id);
-          },
-          child: const Text('Play'),
-          style: ElevatedButton.styleFrom(
-            minimumSize: const Size.fromHeight(50),
-          ),
-        )
+        GetX<PacksController>(
+          builder: (_controller) => AnimatedSwitcher(
+              duration: const Duration(milliseconds: 100),
+              child: _getWidget(_controller.isEmpty)),
+        ),
       ],
     );
+  }
+
+  Widget _getWidget(bool _empty) {
+    if (_empty) {
+      return ElevatedButton(
+        key: const ValueKey(1),
+        child: const Text('Select at least one pack'),
+        style: ElevatedButton.styleFrom(
+          minimumSize: const Size.fromHeight(50),
+        ),
+        onPressed: null,
+      );
+    } else {
+      return ElevatedButton(
+        key: const ValueKey(2),
+        onPressed: () {
+          Get.toNamed(GameScreen.id);
+        },
+        child: const Text('Play'),
+        style: ElevatedButton.styleFrom(
+          minimumSize: const Size.fromHeight(50),
+        ),
+      );
+    }
   }
 }
 

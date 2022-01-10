@@ -6,6 +6,7 @@ import '../enums/enums.dart';
 class PacksController extends GetxController {
   final List<GameCategory> selectedPacks = [];
   final allGamePacks = allPacks.keys.toList();
+  bool get isEmpty => _emptyChecker();
   final toggledPacks = <GameCategory, bool>{
     GameCategory.gettingStarted: false,
     // GameCategory.raisingTheStakes: false,
@@ -19,6 +20,14 @@ class PacksController extends GetxController {
     setDefaults();
     // print(allGamePacks);
     super.onInit();
+  }
+
+  bool _emptyChecker() {
+    if (toggledPacks.values.contains(false)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   void setDefaults() {
