@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,9 +19,22 @@ class FeedbackController extends GetxController {
     dropdownValue.value = value!;
   }
 
-  void submitFeedback() {
+  Future<void> submitFeedback() async {
     final _feedbackText = textController.text;
-    print(_feedbackText);
-    print(dropdownValue.value);
+    if (dropdownValue.value == 'General Feedback') {
+      final CollectionReference _users =
+          FirebaseFirestore.instance.collection('generalFeedback');
+
+      return _users.add({
+        'feedbackText': _feedbackText,
+      }).then((value) => null);
+    } else {
+      final CollectionReference _users =
+          FirebaseFirestore.instance.collection('cardSuggestions');
+
+      return _users.add({
+        'feedbackText': _feedbackText,
+      }).then((value) => null);
+    }
   }
 }

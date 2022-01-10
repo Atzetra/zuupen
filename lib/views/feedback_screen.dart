@@ -74,9 +74,11 @@ class FeedbackScreen extends StatelessWidget {
                   ),
                 ),
                 ElevatedButton.icon(
-                  onPressed: () {
+                  onPressed: () async {
                     if (_feedbackController.formKey.currentState!.validate()) {
-                      _feedbackController.submitFeedback();
+                      await _feedbackController.submitFeedback();
+                      Get.snackbar('Feedback sent!',
+                          'The developer will take a look at it.');
                     }
                   },
                   icon: const Icon(Icons.send),
