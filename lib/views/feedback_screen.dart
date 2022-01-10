@@ -65,7 +65,7 @@ class FeedbackScreen extends StatelessWidget {
                             maxLines: 3,
                             decoration: const InputDecoration(
                               hintText:
-                                  'Enter your feedback or card suggestions here',
+                                  'Enter your feedback or card suggestions here.',
                             ),
                           ),
                         ],
@@ -85,6 +85,13 @@ class FeedbackScreen extends StatelessWidget {
                   label: const Text('Send Feedback'),
                   style: ElevatedButton.styleFrom(
                       minimumSize: const Size.fromHeight(50)),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Text(
+                  'Feedback given here will be sent and collected to my own server. Data entered here will only be used for improving the app.',
+                  style: TextStyle(color: Colors.white38),
                 ),
               ],
             ),
