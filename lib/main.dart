@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:zuupen/views/end_screen.dart';
+import 'package:zuupen/views/feedback_screen.dart';
 import 'package:zuupen/views/game_screen.dart';
 
 import 'bindings/launch_bindings.dart';
@@ -36,6 +37,10 @@ class MyApp extends StatelessWidget {
             binding: GameScreenBindings(),
             page: () => const GameScreen()),
         GetPage(name: EndScreen.id, page: () => const EndScreen()),
+        GetPage(
+            name: FeedbackScreen.id,
+            binding: FeedbackBindings(),
+            page: () => const FeedbackScreen()),
       ],
     );
   }

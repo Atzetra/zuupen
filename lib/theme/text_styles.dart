@@ -2,5 +2,5 @@ import 'package:flutter/material.dart';
 
 class CustomTextStyles {
   static const TextStyle header =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+      TextStyle(fontSize: 35, fontWeight: FontWeight.bold);
 }
