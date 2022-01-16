@@ -119,7 +119,7 @@ List<GameCard> caliente = [
       firstLine:
           '{{0}} choose a letter. All players who have slept with a person whose first name starts with this letter, drink {[0]} times.',
       cardType: CardType.rule,
-      players: 0,
+      players: 1,
       elements: 1),
   GameCard(
       firstLine:
