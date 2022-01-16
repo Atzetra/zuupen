@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:zuupen/constants/packs/caliente.dart';
 import 'package:zuupen/constants/packs/card_packs.dart';
 import 'package:zuupen/controllers/packs_controller.dart';
 import 'package:zuupen/views/game_screen.dart';
@@ -19,7 +20,7 @@ class PackSelection extends StatelessWidget {
     return ScaffoldBase(
       children: [
         const Text(
-          'Select decks',
+          'Select Deck',
           style: CustomTextStyles.header,
         ),
         Column(
@@ -30,6 +31,13 @@ class PackSelection extends StatelessWidget {
               subtitle: Text(
                   'Let\'s get this party started.\n${gettingStarted.length} cards'),
               gameCategory: GameCategory.gettingStarted,
+            ),
+            PackCard(
+              leading: const FaIcon(FontAwesomeIcons.fire),
+              title: const Text('Caliente'),
+              subtitle: Text(
+                  'Is starting to get hot in here.\n${caliente.length} cards'),
+              gameCategory: GameCategory.caliente,
             ),
           ],
         ),
@@ -87,22 +95,28 @@ class PackCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final PacksController _pcksCtrlr = Get.find();
-    return Material(
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: Theme.of(context).backgroundColor,
-        ),
-        child: ListTile(
-          leading: leading,
-          title: title,
-          subtitle: subtitle,
-          trailing: Obx(
-            () => Checkbox(
-              value: _pcksCtrlr.toggledPacks[gameCategory],
-              onChanged: (value) {
-                _pcksCtrlr.togglePack(gameCategory);
-              },
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4),
+      child: Material(
+        child: GestureDetector(
+          onTap: () => _pcksCtrlr.togglePack(gameCategory),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: Theme.of(context).backgroundColor,
+            ),
+            child: ListTile(
+              leading: leading,
+              title: title,
+              subtitle: subtitle,
+              trailing: Obx(
+                () => Checkbox(
+                  value: _pcksCtrlr.toggledPacks[gameCategory],
+                  onChanged: (value) {
+                    _pcksCtrlr.togglePack(gameCategory);
+                  },
+                ),
+              ),
             ),
           ),
         ),

@@ -16,4 +16,6 @@ enum CardType {
   virus,
   custom,
   bottomsUp,
+  caliente,
+  dual,
 }
