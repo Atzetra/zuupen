@@ -6,9 +6,9 @@ class PacksController extends GetxController {
   final List<GameCategory> _selectedPacks = [];
   final _toggledPacks = <GameCategory, bool>{
     GameCategory.gettingStarted: false,
+    GameCategory.caliente: false,
     // GameCategory.raisingTheStakes: false,
     // GameCategory.noSecrets: false,
-    // GameCategory.caliente: false,
     // GameCategory.downBad: false,
   }.obs;
   List<GameCategory> get selectedPacks => _selectedPacks;
@@ -23,7 +23,7 @@ class PacksController extends GetxController {
   }
 
   bool _emptyChecker() {
-    if (toggledPacks.values.contains(false)) {
+    if (!toggledPacks.values.contains(true)) {
       return true;
     } else {
       return false;
@@ -37,12 +37,10 @@ class PacksController extends GetxController {
   void togglePack(GameCategory _category) => _togglePack(_category);
 
   void _togglePack(GameCategory category) {
-    if (toggledPacks[category] == false) {
-      selectedPacks.add(category);
-    } else if (toggledPacks[category] == true) {
-      selectedPacks.removeWhere((element) => element == category);
-    }
-    toggledPacks.update(category, (value) => !value);
+    _selectedPacks.clear();
+    _selectedPacks.add(category);
+    _toggledPacks.updateAll((key, value) => false);
+    _toggledPacks.update(category, (value) => true);
     // print(selectedPacks);
   }
 }
