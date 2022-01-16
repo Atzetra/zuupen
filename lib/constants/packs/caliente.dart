@@ -29,7 +29,7 @@ List<GameCard> caliente = [
       elements: 0),
   GameCard(
       firstLine:
-          '{{0}}, mime a sexual position with {{1}}. {[0]} sips in case of refusal.',
+          '{{0}}, mime a sexual position with {{1}}. {[0]} sip in case of refusal.',
       cardType: CardType.rule,
       players: 2,
       elements: 1),
@@ -53,19 +53,19 @@ List<GameCard> caliente = [
       elements: 0),
   GameCard(
       firstLine:
-          "{{0}}, if you've ever masturbated before going on a date, drink {[0]} sips.",
+          "{{0}}, if you've ever masturbated before going on a date, drink {[0]} sip.",
       cardType: CardType.rule,
       players: 1,
       elements: 1),
   GameCard(
       firstLine:
-          'What is your favorite sexual position? If you have the same answer as someone else, you both can give out {[0]} sips.',
+          'What is your favorite sexual position? If you have the same answer as someone else, you both can give out {[0]} sip.',
       cardType: CardType.rule,
       players: 0,
       elements: 1),
   GameCard(
       firstLine:
-          '"Super hot female singers", first person to repeat or can\'t think of anything drinks {[0]} times. {{0}} starts.',
+          '"Super hot female singers", first person to repeat or can\'t think of anything drinks {[0]} time. {{0}} starts.',
       cardType: CardType.rule,
       players: 1,
       elements: 1),
@@ -95,7 +95,7 @@ List<GameCard> caliente = [
       elements: 1),
   GameCard(
       firstLine:
-          "{{0}} give out {[0]} sips to someone older than you. If it's impossible drink them.",
+          "{{0}} give out {[0]} sip to someone older than you. If it's impossible drink them.",
       cardType: CardType.rule,
       players: 1,
       elements: 1),
@@ -106,18 +106,18 @@ List<GameCard> caliente = [
       elements: 1),
   GameCard(
       firstLine:
-          '{{0}} give out {[0]} sips if you can name 3 One Direction songs. Otherwise drink them.',
+          '{{0}} give out {[0]} sip if you can name 3 One Direction songs. Otherwise drink them.',
       cardType: CardType.rule,
       players: 1,
       elements: 1),
   GameCard(
-      firstLine: "{{0}}, lick {{1}}'s lips or drink {[0]} times.",
+      firstLine: "{{0}}, lick {{1}}'s lips or drink {[0]} time.",
       cardType: CardType.rule,
       players: 2,
       elements: 1),
   GameCard(
       firstLine:
-          '{{0}} choose a letter. All players who have slept with a person whose first name starts with this letter, drink {[0]} times.',
+          '{{0}} choose a letter. All players who have slept with a person whose first name starts with this letter, drink {[0]} time.',
       cardType: CardType.rule,
       players: 1,
       elements: 1),
@@ -163,7 +163,7 @@ List<GameCard> caliente = [
       elements: 1),
   GameCard(
       firstLine:
-          '{{0}}, choose someone to show you one of their private parts. {[0]} sips in case of refusal.',
+          '{{0}}, choose someone to show you one of their private parts. {[0]} sip in case of refusal.',
       cardType: CardType.rule,
       players: 1,
       elements: 1),
@@ -220,12 +220,12 @@ List<GameCard> caliente = [
       elements: 0),
   GameCard(
       firstLine:
-          "{{0}}, if you've ever made love in the shower, drink {[0]} sips. Otherwise give them out.",
+          "{{0}}, if you've ever made love in the shower, drink {[0]} sip. Otherwise give them out.",
       cardType: CardType.rule,
       players: 1,
       elements: 1),
   GameCard(
-      firstLine: '{{0}}, let someone lick your nipples or drink {[0]} times.',
+      firstLine: '{{0}}, let someone lick your nipples or drink {[0]} time.',
       cardType: CardType.rule,
       players: 1,
       elements: 1),
@@ -242,7 +242,7 @@ List<GameCard> caliente = [
       elements: 1),
   GameCard(
       firstLine:
-          '"Places to have a guy cum on". First person to run out of ideas drinks {[0]} times. {{0}} starts.',
+          '"Places to have a guy cum on". First person to run out of ideas drinks {[0]} time. {{0}} starts.',
       cardType: CardType.game,
       players: 1,
       elements: 1),
@@ -260,7 +260,7 @@ List<GameCard> caliente = [
       elements: 1),
   GameCard(
       firstLine:
-          'Drink {[0]} times if you like the idea of fucking while watching porn.',
+          'Drink {[0]} time if you like the idea of fucking while watching porn.',
       cardType: CardType.rule,
       players: 0,
       elements: 1),
@@ -271,7 +271,7 @@ List<GameCard> caliente = [
       players: 1,
       elements: 1),
   GameCard(
-      firstLine: "{{0}}, touch someone's boobs. {[0]} sips in case of refusal.",
+      firstLine: "{{0}}, touch someone's boobs. {[0]} sip in case of refusal.",
       cardType: CardType.rule,
       players: 1,
       elements: 1),
@@ -289,7 +289,7 @@ List<GameCard> caliente = [
       elements: 1),
   GameCard(
       firstLine:
-          '{{0}}, if you kiss {{1}} on the cheek, everyone else has to take {[0]} sips.',
+          '{{0}}, if you kiss {{1}} on the cheek, everyone else has to take {[0]} sip.',
       cardType: CardType.rule,
       players: 2,
       elements: 1),
@@ -337,7 +337,7 @@ List<GameCard> caliente = [
       elements: 1),
   GameCard(
       firstLine:
-          'Drink {[0]} times if several people in this room are attractive according to you.',
+          'Drink {[0]} time if several people in this room are attractive according to you.',
       cardType: CardType.rule,
       players: 0,
       elements: 1),
@@ -355,7 +355,7 @@ List<GameCard> caliente = [
       elements: 1),
   GameCard(
       firstLine:
-          "Let's get sensual! Go around the room and touch the chest of the person to your right or drink {[0]} times.",
+          "Let's get sensual! Go around the room and touch the chest of the person to your right or drink {[0]} time.",
       cardType: CardType.rule,
       players: 0,
       elements: 1),
@@ -367,7 +367,7 @@ List<GameCard> caliente = [
       elements: 1),
   GameCard(
       firstLine:
-          '"Sex toys", the first to run out of ideas drinks {[0]} times. {{0}} begins.',
+          '"Sex toys", the first to run out of ideas drinks {[0]} time. {{0}} begins.',
       cardType: CardType.game,
       players: 1,
       elements: 1),
@@ -379,24 +379,24 @@ List<GameCard> caliente = [
       elements: 1),
   GameCard(
       firstLine:
-          "{{0}}, put your hand in someone's underwear. {[0]} sips in case of refusal.",
+          "{{0}}, put your hand in someone's underwear. {[0]} sip in case of refusal.",
       cardType: CardType.rule,
       players: 1,
       elements: 1),
   GameCard(
-      firstLine: '{{0}} and {{1}} must agree to give one person {[0]} sips.',
+      firstLine: '{{0}} and {{1}} must agree to give one person {[0]} sip.',
       cardType: CardType.rule,
       players: 2,
       elements: 1),
   GameCard(
       firstLine:
-          '{{0}}, for 150.000 euros, would you sleep with {{1}}? Yes: give out {[0]} sips. No: drink them.',
+          '{{0}}, for 150.000 euros, would you sleep with {{1}}? Yes: give out {[0]} sip. No: drink them.',
       cardType: CardType.rule,
       players: 2,
       elements: 1),
   GameCard(
       firstLine:
-          "{{drink}} sips if you've ever masturbated in front of your partner.",
+          "{{drink}} if you've ever masturbated in front of your partner.",
       cardType: CardType.rule,
       players: 0,
       elements: 1),
@@ -415,7 +415,7 @@ List<GameCard> caliente = [
       elements: 0),
   GameCard(
       firstLine:
-          'Would you rather have a steamy night with Emma Watson or Margot Robbie? Vote at the same time, losers drink {[0]} times.',
+          'Would you rather have a steamy night with Emma Watson or Margot Robbie? Vote at the same time, losers drink {[0]} time.',
       cardType: CardType.game,
       players: 0,
       elements: 1),
@@ -426,7 +426,7 @@ List<GameCard> caliente = [
       elements: 1),
   GameCard(
       firstLine:
-          "Bra contest! Guys you're the jury. The winner gives out {[0]} sips.",
+          "Bra contest! Guys you're the jury. The winner gives out {[0]} sip.",
       cardType: CardType.game,
       players: 0,
       elements: 1),
