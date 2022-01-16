@@ -7,7 +7,9 @@ class FeedbackController extends GetxController {
   final textController = TextEditingController();
   final items = ['General Feedback', 'Card Suggestion'];
   final dropdownValue = 'General Feedback'.obs;
+  final _isLoading = false.obs;
   GlobalKey<FormState> get formKey => _formKey;
+  bool get isLoading => _isLoading.value;
 
   @override
   void onClose() {
@@ -20,21 +22,25 @@ class FeedbackController extends GetxController {
   }
 
   Future<void> submitFeedback() async {
+    _isLoading.value = true;
+    update();
     final _feedbackText = textController.text;
     if (dropdownValue.value == 'General Feedback') {
-      final CollectionReference _users =
+      final CollectionReference _feedback =
           FirebaseFirestore.instance.collection('generalFeedback');
 
-      return _users.add({
+      _feedback.add({
         'feedbackText': _feedbackText,
       }).then((value) => null);
     } else {
-      final CollectionReference _users =
+      final CollectionReference _feedback =
           FirebaseFirestore.instance.collection('cardSuggestions');
 
-      return _users.add({
+      _feedback.add({
         'feedbackText': _feedbackText,
       }).then((value) => null);
     }
+    _isLoading.value = false;
+    update();
   }
 }
