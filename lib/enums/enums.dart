@@ -17,4 +17,5 @@ enum CardType {
   custom,
   bottomsUp,
   caliente,
+  dual,
 }

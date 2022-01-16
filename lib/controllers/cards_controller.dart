@@ -21,6 +21,8 @@ class CardsController extends GetxController {
   final _virusCards = <GameCard>[];
   final _bottomsUpCards = <GameCard>[];
   final _gameCards = <GameCard>[];
+  final _calienteCards = <GameCard>[];
+  final _dualCards = <GameCard>[];
   final _names = <String>[];
 
   CardsController();
@@ -78,43 +80,27 @@ class CardsController extends GetxController {
         case CardType.bottomsUp:
           _bottomsUpCards.add(_card);
           break;
+        case CardType.caliente:
+          _calienteCards.add(_card);
+          break;
+        case CardType.dual:
+          _dualCards.add(_card);
+          break;
         default:
           break;
       }
     }
-
-    // print('--------------------Rulecards-------------------------');
-    // print(_ruleCards.length);
-    // _ruleCards.forEach((element) {
-    //   print(element.firstLine);
-    // });
-    // print('---------------------Bottoms----------------------------');
-    // print(_bottomsUpCards.length);
-    // _bottomsUpCards.forEach((element) {
-    //   print(element.firstLine);
-    // });
-    // print(
-    //     '--------------------------Gamecard----------------------------------');
-    // print(_gameCards.length);
-    // _gameCards.forEach((element) {
-    //   print(element.firstLine);
-    // });
-    // print(
-    //     '----------------------------------Virus--------------------------------------');
-    // print(_virusCards.length);
-    // _virusCards.forEach((element) {
-    //   print(element.firstLine);
-    // });
   }
 
   void cardSelector() {
-    print('_pickBuffer before cardSelector: ' + _pickBuffer.length.toString());
     // 40
     _pickBuffer.addAll((_ruleCards.toList()..shuffle()).take(40));
     // 6
     _pickBuffer.addAll((_gameCards.toList()..shuffle()).take(6));
     // 2
     _pickBuffer.addAll((_bottomsUpCards.toList()..shuffle()).take(2));
+    // 3
+    _pickBuffer.addAll((_calienteCards.toList()..shuffle()).take(3));
 
     _pickBuffer.shuffle();
 
@@ -122,6 +108,23 @@ class CardsController extends GetxController {
     _virusPlacer(
       (_virusCards.toList()..shuffle()).take(5).toList(),
     );
+    // 4
+    _dualCardPlacer((_dualCards.toList()..shuffle()).take(4).toList());
+  }
+
+  void _dualCardPlacer(List<GameCard> _dualCards) {
+    final _random = Random();
+    for (var _card in _dualCards) {
+      final _insertIndex = _random.nextInt(_pickBuffer.length - 1);
+      final _secondCard = GameCard(
+          firstLine: _card.secondLine!,
+          cardType: CardType.dual,
+          players: 0,
+          elements: 0);
+      _pickBuffer
+        ..insert(_insertIndex, _card)
+        ..insert(_insertIndex + 1, _secondCard);
+    }
   }
 
   void _virusPlacer(List<GameCard> _virusses) {
