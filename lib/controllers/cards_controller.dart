@@ -192,6 +192,7 @@ class CardsController extends GetxController {
       if (sips != 1) {
         _rule = _rule.replaceAll("$sips time", "$sips times");
         _rule = _rule.replaceAll("$sips drink", "$sips drinks");
+        _rule = _rule.replaceAll("$sips sip", "$sips sips");
       }
     }
     return _rule;
