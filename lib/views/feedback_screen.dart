@@ -73,19 +73,26 @@ class FeedbackScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                ElevatedButton.icon(
-                  onPressed: () async {
-                    if (_feedbackController.formKey.currentState!.validate()) {
-                      await _feedbackController.submitFeedback();
-                      Get.snackbar('Feedback sent!',
-                          'The developer will take a look at it.');
-                    }
-                  },
-                  icon: const Icon(Icons.send),
-                  label: const Text('Send Feedback'),
-                  style: ElevatedButton.styleFrom(
-                      minimumSize: const Size.fromHeight(50)),
-                ),
+                if (_feedbackController.isLoading)
+                  const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                else
+                  ElevatedButton.icon(
+                    onPressed: () async {
+                      if (_feedbackController.formKey.currentState!
+                          .validate()) {
+                        await _feedbackController.submitFeedback();
+                        Get.snackbar('Feedback sent!',
+                            'The developer will take a look at it.');
+                      }
+                    },
+                    icon: const Icon(Icons.send),
+                    label: const Text('Send Feedback'),
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size.fromHeight(50),
+                    ),
+                  ),
                 const SizedBox(
                   height: 10,
                 ),

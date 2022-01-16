@@ -22,16 +22,13 @@ class ScaffoldBase extends StatelessWidget {
         child: Stack(
           children: [
             PopupMenuButton(
+              onSelected: (_) => Get.toNamed(FeedbackScreen.id),
               itemBuilder: (_) => <PopupMenuItem>[
-                PopupMenuItem(
-                  child: TextButton(
-                    onPressed: () {
-                      Get.toNamed(FeedbackScreen.id);
-                    },
-                    child: const Text(
-                      'Send Feedback',
-                      style: TextStyle(color: Colors.white),
-                    ),
+                const PopupMenuItem(
+                  value: 'feedback',
+                  child: Text(
+                    'Send Feedback',
+                    style: TextStyle(color: Colors.white),
                   ),
                 ),
               ],
