@@ -96,6 +96,8 @@ class GameController extends GetxController {
         return Colors.deepOrange;
       case CardType.game:
         return Colors.green;
+      case CardType.caliente:
+        return Colors.pink;
       default:
         return Colors.green;
     }
@@ -111,6 +113,8 @@ class GameController extends GetxController {
         return 'Virus';
       case CardType.game:
         return 'Game';
+      case CardType.caliente:
+        return 'Caliente';
       default:
         return 'Rule';
     }
