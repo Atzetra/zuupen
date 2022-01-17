@@ -186,7 +186,31 @@ class CardsController extends GetxController {
 
     for (var i = 0; i < _elements; i++) {
       // Random sips between 1 and 5, 6 is exclusive.
-      int sips = 1 + _rng.nextInt(6);
+      final _shuffledistribution = [
+        1,
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        3,
+        3,
+        3,
+        3,
+        3,
+        4,
+        4,
+        4,
+        5,
+        5,
+        6,
+      ];
+      int sips = (_shuffledistribution.toList()..shuffle())
+          .elementAt(_rng.nextInt(_shuffledistribution.length));
+      print(sips);
       _rule = _rule.replaceAll("{[$i]}", sips.toString());
 //       print(rule);
       if (sips != 1) {
