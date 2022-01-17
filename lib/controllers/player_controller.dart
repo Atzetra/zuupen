@@ -14,9 +14,11 @@ class PlayerController extends GetxController {
 
   void addPlayer({required String name}) {
     _players.add(Player(name: name));
+    update();
   }
 
   void removePlayer(int index) {
     _players.removeAt(index);
+    update();
   }
 }

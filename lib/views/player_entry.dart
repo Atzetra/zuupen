@@ -67,24 +67,26 @@ class PlayerEntry extends StatelessWidget {
             ),
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            if (_playerCtrl.players.length >= 2)
-              ElevatedButton.icon(
-                  onPressed: () => Get.toNamed(PackSelection.id),
-                  icon: const FaIcon(FontAwesomeIcons.play),
-                  label: const Text('Play'))
-            else
-              const ElevatedButton(
-                  onPressed: null, child: Text('Not enough players')),
-            TextButton.icon(
-                onPressed: () => Get.bottomSheet(
-                      const EntryBottomSheet(),
-                    ),
-                icon: const FaIcon(FontAwesomeIcons.plus),
-                label: const Text('Add Player')),
-          ],
+        Obx(
+          () => Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              if (_playerCtrl.players.length >= 2)
+                ElevatedButton.icon(
+                    onPressed: () => Get.toNamed(PackSelection.id),
+                    icon: const FaIcon(FontAwesomeIcons.play),
+                    label: const Text('Play'))
+              else
+                const ElevatedButton(
+                    onPressed: null, child: Text('Not enough players')),
+              TextButton.icon(
+                  onPressed: () => Get.bottomSheet(
+                        const EntryBottomSheet(),
+                      ),
+                  icon: const FaIcon(FontAwesomeIcons.plus),
+                  label: const Text('Add Player')),
+            ],
+          ),
         ),
       ],
     );

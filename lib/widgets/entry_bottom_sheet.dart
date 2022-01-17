@@ -28,19 +28,25 @@ class EntryBottomSheet extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                child: TextField(
-                  controller: _controller.textEditingController,
+                child: Form(
+                  key: _controller.formKey,
+                  child: TextFormField(
+                    decoration: const InputDecoration(hintText: 'Name'),
+                    controller: _controller.textEditingController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Enter a name';
+                      }
+                      return null;
+                    },
+                  ),
                 ),
               ),
             ],
           ),
           ElevatedButton.icon(
             onPressed: () {
-              Get.find<PlayerController>().addPlayer(
-                name: _controller.textEditingController.text,
-              );
-
-              Get.back();
+              _controller.addPlayer();
             },
             icon: const FaIcon(FontAwesomeIcons.plus),
             label: const Text('Add'),
