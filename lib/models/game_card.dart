@@ -6,7 +6,6 @@ part 'game_card.g.dart';
 
 @JsonSerializable()
 class GameCard {
-  late final int? id;
   String firstLine;
   String? secondLine;
   final CardType cardType;
@@ -14,8 +13,7 @@ class GameCard {
   final int elements;
 
   GameCard(
-      {this.id,
-      required this.firstLine,
+      {required this.firstLine,
       this.secondLine,
       required this.cardType,
       required this.players,
@@ -35,7 +33,6 @@ class GameCard {
     int? elements,
   }) {
     return GameCard(
-      id: id ?? this.id,
       firstLine: firstLine ?? this.firstLine,
       secondLine: secondLine ?? this.secondLine,
       cardType: cardType ?? this.cardType,

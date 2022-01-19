@@ -7,7 +7,6 @@ part of 'game_card.dart';
 // **************************************************************************
 
 GameCard _$GameCardFromJson(Map<String, dynamic> json) => GameCard(
-      id: json['id'] as int?,
       firstLine: json['firstLine'] as String,
       secondLine: json['secondLine'] as String?,
       cardType: $enumDecode(_$CardTypeEnumMap, json['cardType']),
@@ -16,7 +15,6 @@ GameCard _$GameCardFromJson(Map<String, dynamic> json) => GameCard(
     );
 
 Map<String, dynamic> _$GameCardToJson(GameCard instance) => <String, dynamic>{
-      'id': instance.id,
       'firstLine': instance.firstLine,
       'secondLine': instance.secondLine,
       'cardType': _$CardTypeEnumMap[instance.cardType],
