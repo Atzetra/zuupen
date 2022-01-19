@@ -1,5 +1,10 @@
+import 'package:json_annotation/json_annotation.dart';
+
 import '../enums/enums.dart';
 
+part 'game_card.g.dart';
+
+@JsonSerializable()
 class GameCard {
   late final int? id;
   String firstLine;
@@ -15,6 +20,11 @@ class GameCard {
       required this.cardType,
       required this.players,
       required this.elements});
+
+  factory GameCard.fromJson(Map<String, dynamic> json) =>
+      _$GameCardFromJson(json);
+
+  Map<String, dynamic> toJson() => _$GameCardToJson(this);
 
   GameCard clone({
     int? id,
