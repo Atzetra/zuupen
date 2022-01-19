@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:zuupen/constants/packs/caliente.dart';
-import 'package:zuupen/constants/packs/card_packs.dart';
+import 'package:zuupen/controllers/database_controller.dart';
 import 'package:zuupen/controllers/packs_controller.dart';
 import 'package:zuupen/views/game_screen.dart';
 
@@ -23,23 +22,27 @@ class PackSelection extends StatelessWidget {
           'Select Deck',
           style: CustomTextStyles.header,
         ),
-        Column(
-          children: [
-            PackCard(
-              leading: const FaIcon(FontAwesomeIcons.cocktail),
-              title: const Text('Getting Started'),
-              subtitle: Text(
-                  'Let\'s get this party started.\n${gettingStarted.length} cards'),
-              gameCategory: GameCategory.gettingStarted,
-            ),
-            PackCard(
-              leading: const FaIcon(FontAwesomeIcons.fire),
-              title: const Text('Caliente'),
-              subtitle: Text(
-                  'Is starting to get hot in here.\n${caliente.length} cards'),
-              gameCategory: GameCategory.caliente,
-            ),
-          ],
+        GetX<DatabaseController>(
+          builder: (controller) {
+            return Column(
+              children: [
+                PackCard(
+                  leading: const FaIcon(FontAwesomeIcons.cocktail),
+                  title: const Text('Getting Started'),
+                  subtitle: Text(
+                      'Let\'s get this party started.\n${controller.gettingStarted.length} cards'),
+                  gameCategory: GameCategory.gettingStarted,
+                ),
+                PackCard(
+                  leading: const FaIcon(FontAwesomeIcons.fire),
+                  title: const Text('Caliente'),
+                  subtitle: Text(
+                      'Is starting to get hot in here.\n${controller.caliente.length} cards'),
+                  gameCategory: GameCategory.caliente,
+                ),
+              ],
+            );
+          },
         ),
         const SizedBox(
           height: 10,
