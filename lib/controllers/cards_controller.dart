@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:get/get.dart';
 import 'package:zuupen/constants/extensions/string_extensions.dart';
-import 'package:zuupen/constants/packs/card_packs.dart';
+import 'package:zuupen/controllers/database_controller.dart';
 import 'package:zuupen/controllers/packs_controller.dart';
 import 'package:zuupen/controllers/player_controller.dart';
 import 'package:zuupen/enums/enums.dart';
@@ -12,6 +12,7 @@ class CardsController extends GetxController {
   // Load in needed controllers for this class
   final PlayerController _playerController = Get.find<PlayerController>();
   final PacksController _packsController = Get.find<PacksController>();
+  final DatabaseController _databaseController = Get.find<DatabaseController>();
 
   final _cards = <GameCard>[];
   final _pickBuffer = <GameCard>[];
@@ -61,7 +62,7 @@ class CardsController extends GetxController {
   void cardSeparator() {
     // Add all selected decks to card pile
     for (var _pack in _packsController.selectedPacks) {
-      _cards.addAll(allPacks[_pack]!);
+      _cards.addAll(_databaseController.allPacks[_pack]!);
       _cards.removeWhere(
           (element) => element.players > _playerController.players.length);
     }

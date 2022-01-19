@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:zuupen/controllers/cards_controller.dart';
+import 'package:zuupen/controllers/database_controller.dart';
 import 'package:zuupen/controllers/feedback_controller.dart';
 import 'package:zuupen/controllers/game_controller.dart';
 import 'package:zuupen/controllers/packs_controller.dart';
@@ -34,5 +35,12 @@ class FeedbackBindings implements Bindings {
   @override
   void dependencies() {
     Get.put<FeedbackController>(FeedbackController());
+  }
+}
+
+class LaunchScreenBindings implements Bindings {
+  @override
+  void dependencies() {
+    Get.put<DatabaseController>(DatabaseController(), permanent: true);
   }
 }

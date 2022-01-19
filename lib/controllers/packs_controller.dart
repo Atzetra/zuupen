@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import '../enums/enums.dart';
 
 class PacksController extends GetxController {
+  final List<GameCategory> allPacks = [];
   final List<GameCategory> _selectedPacks = [];
   final _toggledPacks = <GameCategory, bool>{
     GameCategory.gettingStarted: false,

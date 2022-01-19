@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData.dark(),
       themeMode: ThemeMode.dark,
       initialRoute: LaunchScreen.id,
+      initialBinding: LaunchScreenBindings(),
       getPages: [
         GetPage(name: LaunchScreen.id, page: () => const LaunchScreen()),
         GetPage(
