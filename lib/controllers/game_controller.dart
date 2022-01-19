@@ -6,7 +6,6 @@ import 'package:zuupen/enums/enums.dart';
 import 'package:zuupen/models/game_card.dart';
 import 'package:zuupen/views/end_screen.dart';
 import 'package:zuupen/views/launch_screen.dart';
-import 'package:zuupen/views/player_entry.dart';
 
 class GameController extends GetxController {
   final CardsController _cardsController = Get.find();
