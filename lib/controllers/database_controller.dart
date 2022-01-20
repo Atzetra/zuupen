@@ -10,9 +10,11 @@ import 'package:zuupen/models/game_card.dart';
 class DatabaseController extends GetxController {
   final _gettingStarted = <GameCard>[].obs;
   final _caliente = <GameCard>[].obs;
+  final _raisingStakes = <GameCard>[].obs;
   final Map<GameCategory, List<GameCard>> allPacks = {};
   List<GameCard> get gettingStarted => _gettingStarted;
   List<GameCard> get caliente => _caliente;
+  List<GameCard> get raisingStakes => _raisingStakes;
 
   @override
   void onInit() async {
@@ -25,9 +27,12 @@ class DatabaseController extends GetxController {
         await HttpProvider().getData(dotenv.env['CALIENTE_API']);
     final responseGettingStarted =
         await HttpProvider().getData(dotenv.env['GETTINGSTARTED_API']);
+    final responseRaisingStakes =
+        await HttpProvider().getData(dotenv.env['RAISINGSTAKES_API']);
 
     if (responseGettingStarted.statusCode == 200 &&
-        responseCaliente.statusCode == 200) {
+        responseCaliente.statusCode == 200 &&
+        responseRaisingStakes.statusCode == 200) {
       final List<dynamic> response = jsonDecode(responseGettingStarted.body);
       for (var _item in response) {
         _gettingStarted.add(
@@ -40,9 +45,18 @@ class DatabaseController extends GetxController {
           GameCard.fromJson(_response),
         );
       }
+      final List<dynamic> responseThree =
+          jsonDecode(responseRaisingStakes.body);
+      for (var _response in responseThree) {
+        _raisingStakes.add(
+          GameCard.fromJson(_response),
+        );
+      }
 
+      // Add packs to allPacks list
       allPacks[GameCategory.gettingStarted] = _gettingStarted;
-      allPacks[GameCategory.caliente] = caliente;
+      allPacks[GameCategory.caliente] = _caliente;
+      allPacks[GameCategory.raisingTheStakes] = _raisingStakes;
     } else {
       await Get.dialog(AlertDialog(
         title: const Text("Can't load the gamecards"),
