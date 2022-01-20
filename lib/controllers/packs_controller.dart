@@ -8,7 +8,7 @@ class PacksController extends GetxController {
   final _toggledPacks = <GameCategory, bool>{
     GameCategory.gettingStarted: false,
     GameCategory.caliente: false,
-    // GameCategory.raisingTheStakes: false,
+    GameCategory.raisingTheStakes: false,
     // GameCategory.noSecrets: false,
     // GameCategory.downBad: false,
   }.obs;

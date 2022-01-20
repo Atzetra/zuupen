@@ -34,6 +34,13 @@ class PackSelection extends StatelessWidget {
                   gameCategory: GameCategory.gettingStarted,
                 ),
                 PackCard(
+                  leading: const FaIcon(FontAwesomeIcons.cocktail),
+                  title: const Text('Raising The Stakes'),
+                  subtitle: Text(
+                      'Time to go a step further.\n${controller.raisingStakes.length} cards'),
+                  gameCategory: GameCategory.raisingTheStakes,
+                ),
+                PackCard(
                   leading: const FaIcon(FontAwesomeIcons.fire),
                   title: const Text('Caliente'),
                   subtitle: Text(
