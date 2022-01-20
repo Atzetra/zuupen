@@ -11,6 +11,7 @@
 .vscode
 .fvm
 *.env
+gamecards.json
 
 # IntelliJ related
 *.iml
