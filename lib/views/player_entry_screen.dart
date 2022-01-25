@@ -5,12 +5,12 @@ import 'package:get/get.dart';
 import '../controllers/player_controller.dart';
 import '../widgets/entry_bottom_sheet.dart';
 import '../widgets/scaffold_base.dart';
-import 'pack_selection.dart';
+import 'pack_selection_screen.dart';
 
-class PlayerEntry extends StatelessWidget {
+class PlayerEntryScreen extends StatelessWidget {
   static const String id = '/PlayerEntry';
 
-  const PlayerEntry({Key? key}) : super(key: key);
+  const PlayerEntryScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +73,7 @@ class PlayerEntry extends StatelessWidget {
             children: [
               if (_playerCtrl.players.length >= 2)
                 ElevatedButton.icon(
-                    onPressed: () => Get.toNamed(PackSelection.id),
+                    onPressed: () => Get.toNamed(PackSelectionScreen.id),
                     icon: const FaIcon(FontAwesomeIcons.play),
                     label: const Text('Play'))
               else

@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../widgets/scaffold_base.dart';
-import 'player_entry.dart';
+import 'player_entry_screen.dart';
 
 class LaunchScreen extends StatelessWidget {
   static const String id = '/LaunchScreen';
@@ -28,7 +28,7 @@ class LaunchScreen extends StatelessWidget {
               Expanded(
                 child: ElevatedButton(
                   onPressed: () {
-                    Get.toNamed(PlayerEntry.id);
+                    Get.toNamed(PlayerEntryScreen.id);
                   },
                   child: const Text('Play'),
                 ),

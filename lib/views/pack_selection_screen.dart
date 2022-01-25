@@ -9,8 +9,8 @@ import '../enums/enums.dart';
 import '../theme/text_styles.dart';
 import '../widgets/scaffold_base.dart';
 
-class PackSelection extends StatelessWidget {
-  const PackSelection({Key? key}) : super(key: key);
+class PackSelectionScreen extends StatelessWidget {
+  const PackSelectionScreen({Key? key}) : super(key: key);
 
   static const String id = '/PackSelection';
 
