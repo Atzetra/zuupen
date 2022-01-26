@@ -1,24 +1,26 @@
-import 'package:get/get.dart';
-
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../models/player.dart';
 
-class PlayerController extends GetxController {
-  final _players = <Player>[
-    Player(name: 'Lotte'),
-    Player(name: 'Fiona'),
-    Player(name: 'Niek'),
-    Player(name: 'Marlies'),
-    Player(name: 'Thijs'),
-  ].obs;
-  List<Player> get players => _players;
+final playerProvider =
+    StateNotifierProvider<PlayerProvider, List<Player>>((ref) {
+  return PlayerProvider();
+});
 
-  void addPlayer({required String name}) {
-    _players.add(Player(name: name));
-    update();
+class PlayerProvider extends StateNotifier<List<Player>> {
+  PlayerProvider()
+      : super([
+          Player(name: 'Lotte'),
+          Player(name: 'Marlies'),
+          Player(name: 'Bruno'),
+        ]);
+
+  void addPlayer(String name) {
+    state = [...state, Player(name: name)];
   }
 
-  void removePlayer(int index) {
-    _players.removeAt(index);
-    update();
+  void removePlayer(index) {
+    final List<Player> _buffer = state;
+    _buffer.removeAt(index);
+    state = [..._buffer];
   }
 }

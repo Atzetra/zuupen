@@ -1,31 +1,30 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class FeedbackController extends GetxController {
+// TODO: Convert to Statenotifier
+final feedbackProvider =
+    ChangeNotifierProvider<FeedbackController>((ref) => FeedbackController());
+
+class FeedbackController extends ChangeNotifier {
   final _formKey = GlobalKey<FormState>();
   final textController = TextEditingController();
   final items = ['General Feedback', 'Card Suggestion'];
-  final dropdownValue = 'General Feedback'.obs;
-  final _isLoading = false.obs;
+  String dropdownValue = 'General Feedback';
+  bool _isLoading = false;
   GlobalKey<FormState> get formKey => _formKey;
-  bool get isLoading => _isLoading.value;
-
-  @override
-  void onClose() {
-    textController.dispose();
-    super.onClose();
-  }
+  bool get isLoading => _isLoading;
 
   void dropdownChanger(String? value) {
-    dropdownValue.value = value!;
+    dropdownValue = value!;
+    notifyListeners();
   }
 
   Future<void> submitFeedback() async {
-    _isLoading.value = true;
-    update();
+    _isLoading = true;
+    notifyListeners();
     final _feedbackText = textController.text;
-    if (dropdownValue.value == 'General Feedback') {
+    if (dropdownValue == 'General Feedback') {
       final CollectionReference _feedback =
           FirebaseFirestore.instance.collection('generalFeedback');
 
@@ -40,7 +39,7 @@ class FeedbackController extends GetxController {
         'feedbackText': _feedbackText,
       }).then((value) => null);
     }
-    _isLoading.value = false;
-    update();
+    _isLoading = false;
+    notifyListeners();
   }
 }

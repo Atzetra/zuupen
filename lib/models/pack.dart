@@ -1,9 +1,14 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import '../enums/enums.dart';
-import 'game_card.dart';
 
-class Pack {
-  final GameCategory category;
-  final List<GameCard> cards;
+import 'gamecard.dart';
 
-  Pack({required this.category, required this.cards});
+part 'pack.freezed.dart';
+
+@freezed
+class Pack with _$Pack {
+  factory Pack({
+    required GameCategory category,
+    required List<GameCard> cards,
+  }) = _Pack;
 }

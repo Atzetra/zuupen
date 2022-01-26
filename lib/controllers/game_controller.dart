@@ -1,25 +1,28 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:zuupen/controllers/cards_controller.dart';
-import 'package:zuupen/enums/enums.dart';
-import 'package:zuupen/models/game_card.dart';
-import 'package:zuupen/views/end_screen.dart';
-import 'package:zuupen/views/launch_screen.dart';
+import 'package:zuupen/models/gamecard.dart';
+import 'package:zuupen/routes/router.gr.dart';
+import '../enums/enums.dart';
 
-class GameController extends GetxController {
-  final CardsController _cardsController = Get.find();
+final gameProvider = ChangeNotifierProvider<GameController>((ref) {
+  return GameController(ref);
+});
 
-  final _index = 0.obs;
-  final _gameCards = <GameCard>[].obs;
-  get nextCard => _nextCard;
+// TODO: Convert to statenotifier
+class GameController extends ChangeNotifier {
+  final Ref ref;
+  var _index = 0;
+  final _gameCards = <GameCard>[];
+
+  GameController(this.ref);
   GameCard get showCard => _showCard();
-  get backHandler => _backHandler;
-  String get cardText => _gameCards[_index.value].firstLine;
+  String get cardText => _gameCards[_index].firstLine;
   Color get cardColor => _showColor();
   String get categoryText => _showCategory();
 
-  @override
   void onInit() {
     populate();
     SystemChrome.setPreferredOrientations([
@@ -27,10 +30,8 @@ class GameController extends GetxController {
       DeviceOrientation.landscapeRight,
     ]);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
-    super.onInit();
   }
 
-  @override
   void onClose() {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeLeft,
@@ -38,55 +39,28 @@ class GameController extends GetxController {
       DeviceOrientation.portraitUp,
     ]);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-    super.onClose();
   }
 
   void populate() {
-    _gameCards.addAll(_cardsController.finalCards);
+    final _cards = ref.watch(cardsProvider);
+    _gameCards.addAll(_cards.finalCards);
   }
 
-  Future<bool> _backHandler() async {
-    bool _action = false;
-    await Get.dialog(
-      AlertDialog(
-        title: const Text('End Game?'),
-        content: const Text('Do you want to exit and end this game?'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              _action = false;
-              Get.back(result: false);
-            },
-            child: const Text('No'),
-          ),
-          TextButton(
-            onPressed: () {
-              _action = true;
-              Get.offAllNamed(LaunchScreen.id);
-            },
-            child: const Text('Yes'),
-          ),
-        ],
-      ),
-    );
-    return _action;
-  }
-
-  void _nextCard() {
-    if (_index.value != _gameCards.length - 1) {
-      _index.value++;
-      update();
+  void nextCard(BuildContext context) {
+    if (_index != _gameCards.length - 1) {
+      _index++;
+      notifyListeners();
     } else {
-      Get.offAllNamed(EndScreen.id);
+      AutoRouter.of(context).replace(const EndRoute());
     }
   }
 
   GameCard _showCard() {
-    return _gameCards[_index.value];
+    return _gameCards[_index];
   }
 
   Color _showColor() {
-    switch (_gameCards[_index.value].cardType) {
+    switch (_gameCards[_index].cardType) {
       case CardType.rule:
         return Colors.green;
       case CardType.bottomsUp:
@@ -103,7 +77,7 @@ class GameController extends GetxController {
   }
 
   String _showCategory() {
-    switch (_gameCards[_index.value].cardType) {
+    switch (_gameCards[_index].cardType) {
       case CardType.rule:
         return 'Rule';
       case CardType.bottomsUp:
@@ -118,4 +92,33 @@ class GameController extends GetxController {
         return 'Rule';
     }
   }
+}
+
+Future<bool> backHandler(BuildContext context) async {
+  bool _action = false;
+  await showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('End Game?'),
+          content: const Text('Do you want to exit and end this game?'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                _action = false;
+                AutoRouter.of(context).pop();
+              },
+              child: const Text('No'),
+            ),
+            TextButton(
+              onPressed: () {
+                _action = true;
+                AutoRouter.of(context).navigate(const PlayerEntryRoute());
+              },
+              child: const Text('Yes'),
+            ),
+          ],
+        );
+      });
+  return _action;
 }
