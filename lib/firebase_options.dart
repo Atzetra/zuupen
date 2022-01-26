@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     // ignore: missing_enum_constant_in_switch
     switch (defaultTargetPlatform) {
@@ -40,6 +37,16 @@ class DefaultFirebaseOptions {
     );
   }
 
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyBzPtEKJ6vjGHxzIX6c2wVeCP7oBUQimPw',
+    appId: '1:619810693292:web:d98c25bcffa02ba1dc7f09',
+    messagingSenderId: '619810693292',
+    projectId: 'zuupen-a42a6',
+    authDomain: 'zuupen-a42a6.firebaseapp.com',
+    storageBucket: 'zuupen-a42a6.appspot.com',
+    measurementId: 'G-0H1L8TZJMD',
+  );
+
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCMSaD9pPBenZhtoI81N6RPK8lbYXXN-MU',
     appId: '1:619810693292:android:e76e9d1ed5c17d69dc7f09',
@@ -54,7 +61,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '619810693292',
     projectId: 'zuupen-a42a6',
     storageBucket: 'zuupen-a42a6.appspot.com',
-    iosClientId: '619810693292-8bmji57ecj6ko0k8lv82au8p6co63d8j.apps.googleusercontent.com',
+    iosClientId:
+        '619810693292-8bmji57ecj6ko0k8lv82au8p6co63d8j.apps.googleusercontent.com',
     iosBundleId: 'nl.sastrokarijo.zuupen',
   );
 }
