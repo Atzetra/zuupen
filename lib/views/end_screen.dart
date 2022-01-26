@@ -1,23 +1,25 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:zuupen/views/player_entry_screen.dart';
+import 'package:zuupen/theme/text_styles.dart';
 
 class EndScreen extends StatelessWidget {
   const EndScreen({Key? key}) : super(key: key);
 
-  static String id = '/EndScreen';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text('Ehhh yes that was the game...'),
-          ElevatedButton(
-            onPressed: () => Get.offAllNamed(PlayerEntryScreen.id),
-            child: const Text('Back to the Startscreen'),
-          )
-        ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Text('Game Over!', style: CustomTextStyles.header),
+            ElevatedButton(
+              onPressed: () => AutoRouter.of(context).popUntilRoot(),
+              child: const Text('Back to the Startscreen'),
+            ),
+          ],
+        ),
       ),
     );
   }

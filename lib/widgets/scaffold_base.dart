@@ -1,17 +1,19 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:zuupen/views/feedback_screen.dart';
+import 'package:zuupen/routes/router.gr.dart';
 
 class ScaffoldBase extends StatelessWidget {
   final List<Widget>? children;
   final Color? backgroundColor;
   final CrossAxisAlignment crossAxisAlignment;
+  final bool isLast;
 
   const ScaffoldBase({
     Key? key,
     required this.children,
     this.backgroundColor,
     this.crossAxisAlignment = CrossAxisAlignment.start,
+    this.isLast = false,
   }) : super(key: key);
 
   @override
@@ -21,17 +23,26 @@ class ScaffoldBase extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
-            PopupMenuButton(
-              onSelected: (_) => Get.toNamed(FeedbackScreen.id),
-              itemBuilder: (_) => <PopupMenuItem>[
-                const PopupMenuItem(
-                  value: 'feedback',
-                  child: Text(
-                    'Send Feedback',
-                    style: TextStyle(color: Colors.white),
+            if (!isLast)
+              IconButton(
+                  onPressed: () => AutoRouter.of(context).pop(),
+                  icon: const Icon(Icons.arrow_back)),
+            Positioned(
+              top: 0.0,
+              right: 0.0,
+              child: PopupMenuButton(
+                onSelected: (_) =>
+                    AutoRouter.of(context).push(const FeedbackRoute()),
+                itemBuilder: (_) => <PopupMenuItem>[
+                  const PopupMenuItem(
+                    value: 'feedback',
+                    child: Text(
+                      'Send Feedback',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             Center(
               child: SizedBox(

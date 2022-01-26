@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:zuupen/views/end_screen.dart';
-import 'package:zuupen/views/feedback_screen.dart';
-import 'package:zuupen/views/game_screen.dart';
-import 'package:zuupen/views/launch_screen.dart';
-import 'package:zuupen/views/pack_selection_screen.dart';
-import 'package:zuupen/views/player_entry_screen.dart';
+import '../views/end_screen.dart';
+import '../views/feedback_screen.dart';
+import '../views/game_screen.dart';
+import '../views/launch_screen.dart';
+import '../views/pack_selection_screen.dart';
+import '../views/player_entry_screen.dart';
 
 @MaterialAutoRouter(
   replaceInRouteName: 'Screen,Route',

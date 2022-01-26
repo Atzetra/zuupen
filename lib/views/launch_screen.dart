@@ -1,10 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:zuupen/routes/router.gr.dart';
 
 import '../widgets/scaffold_base.dart';
-import 'player_entry_screen.dart';
 
 class LaunchScreen extends StatelessWidget {
   static const String id = '/LaunchScreen';
@@ -13,6 +13,7 @@ class LaunchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldBase(
+      isLast: true,
       children: [
         const Text(
           'Zuupen',
@@ -28,7 +29,7 @@ class LaunchScreen extends StatelessWidget {
               Expanded(
                 child: ElevatedButton(
                   onPressed: () {
-                    Get.toNamed(PlayerEntryScreen.id);
+                    AutoRouter.of(context).navigate(const PlayerEntryRoute());
                   },
                   child: const Text('Play'),
                 ),

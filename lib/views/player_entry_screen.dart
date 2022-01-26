@@ -1,21 +1,21 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
-
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:zuupen/routes/router.gr.dart';
 import '../controllers/player_controller.dart';
+
 import '../widgets/entry_bottom_sheet.dart';
 import '../widgets/scaffold_base.dart';
-import 'pack_selection_screen.dart';
 
-class PlayerEntryScreen extends StatelessWidget {
+class PlayerEntryScreen extends ConsumerWidget {
   static const String id = '/PlayerEntry';
 
   const PlayerEntryScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final PlayerController _playerCtrl = Get.find();
-
+  Widget build(BuildContext context, WidgetRef ref) {
+    final _playerProvider = ref.watch(playerProvider);
     return ScaffoldBase(
       children: [
         Material(
@@ -35,58 +35,59 @@ class PlayerEntryScreen extends StatelessWidget {
                     'Add Players',
                     style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                   ),
-                  Obx(
-                    () => _playerCtrl.players.isEmpty
-                        ? const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 10.0),
-                            child: Text('No Players Yet'),
-                          )
-                        : ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: _playerCtrl.players.length,
-                            itemBuilder: (context, index) {
-                              return Row(
-                                children: [
-                                  Text(_playerCtrl.players[index].name),
-                                  const Spacer(),
-                                  TextButton(
-                                      onPressed: () {
-                                        _playerCtrl.removePlayer(index);
-                                      },
-                                      child: const Icon(
-                                        Icons.close,
-                                        color: Colors.red,
-                                      )),
-                                ],
-                              );
-                            },
-                          ),
-                  ),
+                  _playerProvider.isEmpty
+                      ? const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 10.0),
+                          child: Text('No Players Yet'),
+                        )
+                      : ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: _playerProvider.length,
+                          itemBuilder: (context, index) {
+                            return Row(
+                              children: [
+                                Text(_playerProvider[index].name),
+                                const Spacer(),
+                                TextButton(
+                                    onPressed: () {
+                                      ref
+                                          .read(playerProvider.notifier)
+                                          .removePlayer(index);
+                                    },
+                                    child: const Icon(
+                                      Icons.close,
+                                      color: Colors.red,
+                                    )),
+                              ],
+                            );
+                          },
+                        ),
                 ],
               ),
             ),
           ),
         ),
-        Obx(
-          () => Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              if (_playerCtrl.players.length >= 2)
-                ElevatedButton.icon(
-                    onPressed: () => Get.toNamed(PackSelectionScreen.id),
-                    icon: const FaIcon(FontAwesomeIcons.play),
-                    label: const Text('Play'))
-              else
-                const ElevatedButton(
-                    onPressed: null, child: Text('Not enough players')),
-              TextButton.icon(
-                  onPressed: () => Get.bottomSheet(
-                        const EntryBottomSheet(),
-                      ),
-                  icon: const FaIcon(FontAwesomeIcons.plus),
-                  label: const Text('Add Player')),
-            ],
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            if (_playerProvider.length >= 2)
+              ElevatedButton.icon(
+                onPressed: () =>
+                    AutoRouter.of(context).navigate(const PackSelectionRoute()),
+                icon: const FaIcon(FontAwesomeIcons.play),
+                label: const Text('Play'),
+              )
+            else
+              const ElevatedButton(
+                  onPressed: null, child: Text('Not enough players')),
+            TextButton.icon(
+                onPressed: () => showModalBottomSheet(
+                    isScrollControlled: true,
+                    context: context,
+                    builder: (context) => EntryBottomSheet()),
+                icon: const FaIcon(FontAwesomeIcons.plus),
+                label: const Text('Add Player')),
+          ],
         ),
       ],
     );

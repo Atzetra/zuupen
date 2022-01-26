@@ -1,39 +1,45 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:zuupen/controllers/game_controller.dart';
-import 'package:zuupen/widgets/scaffold_base.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:zuupen/controllers/cards_controller.dart';
+import '../controllers/game_controller.dart';
+import '../widgets/scaffold_base.dart';
 
-class GameScreen extends StatelessWidget {
+class GameScreen extends HookConsumerWidget {
   const GameScreen({Key? key}) : super(key: key);
-  static String id = '/GameScreen';
 
   @override
-  Widget build(BuildContext context) {
-    final GameController _gameController = Get.find();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final _gameProvider = ref.watch(gameProvider);
+    final _cardsController = ref.watch(cardsProvider);
+    useEffect(() {
+      _cardsController.onInit();
+      _gameProvider.onInit();
+      return _gameProvider.onClose;
+    }, const []);
+
     return WillPopScope(
-      onWillPop: _gameController.backHandler,
+      onWillPop: () => backHandler(context),
       child: GestureDetector(
-        onTap: _gameController.nextCard,
-        child: Obx(
-          () => ScaffoldBase(
-            backgroundColor: _gameController.cardColor,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                _gameController.categoryText,
-                style: const TextStyle(color: Colors.white, fontSize: 40),
+        onTap: () => _gameProvider.nextCard(context),
+        child: ScaffoldBase(
+          backgroundColor: _gameProvider.cardColor,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              _gameProvider.categoryText,
+              style: const TextStyle(color: Colors.white, fontSize: 40),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              _gameProvider.cardText,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 30,
               ),
-              const SizedBox(height: 10),
-              Text(
-                _gameController.cardText,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 30,
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

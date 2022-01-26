@@ -1,19 +1,22 @@
 import 'dart:math';
 
-import 'package:get/get.dart';
-import 'package:zuupen/constants/extensions/string_extensions.dart';
-import 'package:zuupen/controllers/database_controller.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:zuupen/controllers/database_provider.dart';
 import 'package:zuupen/controllers/packs_controller.dart';
 import 'package:zuupen/controllers/player_controller.dart';
-import 'package:zuupen/enums/enums.dart';
-import 'package:zuupen/models/game_card.dart';
 
-class CardsController extends GetxController {
+import '../constants/extensions/string_extensions.dart';
+import '../enums/enums.dart';
+import '../models/gamecard.dart';
+
+final cardsProvider =
+    ChangeNotifierProvider<CardsController>((ref) => CardsController(ref));
+
+class CardsController with ChangeNotifier {
+  CardsController(this.ref);
   // Load in needed controllers for this class
-  final PlayerController _playerController = Get.find<PlayerController>();
-  final PacksController _packsController = Get.find<PacksController>();
-  final DatabaseController _databaseController = Get.find<DatabaseController>();
-
+  final Ref ref;
   final _cards = <GameCard>[];
   final _pickBuffer = <GameCard>[];
   final _finalCards = <GameCard>[];
@@ -26,9 +29,6 @@ class CardsController extends GetxController {
   final _dualCards = <GameCard>[];
   final _names = <String>[];
 
-  CardsController();
-
-  @override
   void onInit() {
     cardSeparator();
     cardSelector();
@@ -36,38 +36,38 @@ class CardsController extends GetxController {
     // for (var _card in _finalCards) {
     //   print(_card.firstLine);
     // }
-    super.onInit();
   }
 
   void cardPopulator() {
+    final _players = ref.watch(playerProvider);
     // Get around the FUCKING annoying thing that shallow object copy isn't a
-    // thing in Dart.
-    for (var _card in _pickBuffer) {
-      _finalCards.add(_card.clone());
-    }
+    // thing in Dart. Praise the Freezed package, may blessings be upon him
 
     // Add names
-    for (var _player in _playerController.players) {
+    for (var _player in _players) {
       _names.add(_player.name);
     }
 
     // Get names into the decks
-    for (var _card in _finalCards) {
-      _card.firstLine =
-          ruleParser(_card.firstLine, _card.players, _card.elements);
-      _card.firstLine = _card.firstLine.capitalizer();
+    for (var _card in _cards) {
+      String _firstLine;
+      _firstLine = ruleParser(_card.firstLine, _card.players, _card.elements);
+      _firstLine = _firstLine.capitalizer();
+      _finalCards.add(_card.copyWith(firstLine: _firstLine));
     }
   }
 
   void cardSeparator() {
-    // Add all selected decks to card pile
-    for (var _pack in _packsController.selectedPacks) {
-      _cards.addAll(_databaseController.allPacks[_pack]!);
-      _cards.removeWhere(
-          (element) => element.players > _playerController.players.length);
-    }
+    final _toggledPacks = ref.watch(toggledPacksProvider);
+    final _databaseCards = ref.watch(databaseProvider);
+    final _players = ref.watch(playerProvider);
+    final _selectedPack = _toggledPacks.keys.firstWhere((element) => true);
 
-    for (var _card in _cards) {
+    _pickBuffer.addAll(_databaseCards[_selectedPack]!);
+    // Add all selected decks to card pile
+    _pickBuffer.removeWhere((element) => element.players > _players.length);
+
+    for (var _card in _pickBuffer) {
       switch (_card.cardType) {
         case CardType.rule:
           _ruleCards.add(_card);
@@ -95,15 +95,15 @@ class CardsController extends GetxController {
 
   void cardSelector() {
     // 40
-    _pickBuffer.addAll((_ruleCards.toList()..shuffle()).take(40));
+    _cards.addAll((_ruleCards.toList()..shuffle()).take(40));
     // 6
-    _pickBuffer.addAll((_gameCards.toList()..shuffle()).take(6));
+    _cards.addAll((_gameCards.toList()..shuffle()).take(6));
     // 2
-    _pickBuffer.addAll((_bottomsUpCards.toList()..shuffle()).take(2));
+    _cards.addAll((_bottomsUpCards.toList()..shuffle()).take(2));
     // 3
-    _pickBuffer.addAll((_calienteCards.toList()..shuffle()).take(3));
+    _cards.addAll((_calienteCards.toList()..shuffle()).take(3));
 
-    _pickBuffer.shuffle();
+    _cards.shuffle();
 
     // 5
     _virusPlacer(
@@ -116,13 +116,13 @@ class CardsController extends GetxController {
   void _dualCardPlacer(List<GameCard> _dualCards) {
     final _random = Random();
     for (var _card in _dualCards) {
-      final _insertIndex = _random.nextInt(_pickBuffer.length - 1);
+      final _insertIndex = _random.nextInt(_cards.length - 1);
       final _secondCard = GameCard(
           firstLine: _card.secondLine!,
           cardType: CardType.dual,
           players: 0,
           elements: 0);
-      _pickBuffer
+      _cards
         ..insert(_insertIndex, _card)
         ..insert(_insertIndex + 1, _secondCard);
     }
@@ -131,16 +131,16 @@ class CardsController extends GetxController {
   void _virusPlacer(List<GameCard> _virusses) {
     final _random = Random();
     for (var _card in _virusses) {
-      final _firstInsertIndex = _random.nextInt(_pickBuffer.length - 1);
+      final _firstInsertIndex = _random.nextInt(_cards.length - 1);
       final _secondInsertIndex = _firstInsertIndex +
           1 +
-          _random.nextInt(_pickBuffer.length - _firstInsertIndex);
+          _random.nextInt(_cards.length - _firstInsertIndex);
       final _virusEnd = GameCard(
           firstLine: _card.secondLine!,
           cardType: CardType.virus,
           players: 0,
           elements: 0);
-      _pickBuffer
+      _cards
         ..insert(_firstInsertIndex, _card)
         ..insert(_secondInsertIndex, _virusEnd);
     }
@@ -188,7 +188,6 @@ class CardsController extends GetxController {
     for (var i = 0; i < _elements; i++) {
       // Random sips between 1 and 5, 6 is exclusive.
       final _shuffledistribution = [
-        1,
         1,
         1,
         1,
