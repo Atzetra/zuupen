@@ -210,7 +210,6 @@ class CardsController with ChangeNotifier {
       ];
       int sips = (_shuffledistribution.toList()..shuffle())
           .elementAt(_rng.nextInt(_shuffledistribution.length));
-      print(sips);
       _rule = _rule.replaceAll("{[$i]}", sips.toString());
 //       print(rule);
       if (sips != 1) {
