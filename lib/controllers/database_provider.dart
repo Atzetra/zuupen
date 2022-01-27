@@ -1,26 +1,33 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:zuupen/services/api_endpoints.dart';
 import '../enums/enums.dart';
 import '../models/gamecard.dart';
 
 final databaseProvider =
     StateNotifierProvider<DatabaseProvider, Map<GameCategory, List<GameCard>>>(
-        (ref) => DatabaseProvider());
+        (ref) => DatabaseProvider(ref.read));
 
 class DatabaseProvider
     extends StateNotifier<Map<GameCategory, List<GameCard>>> {
-  DatabaseProvider()
+  final Reader _read;
+  DatabaseProvider(this._read)
       : super({
           GameCategory.gettingStarted: <GameCard>[],
           GameCategory.raisingTheStakes: <GameCard>[],
           GameCategory.caliente: <GameCard>[],
-        });
+        }) {
+    onInit();
+  }
 
-  Future<void> packAdd(List response, GameCategory category) async {
-    for (var _item in response) {
-      state[category]!.add(
-        GameCard.fromJson(_item),
-      );
-    }
+  Future<void> onInit() async {
+    await Future.forEach(state.entries, (MapEntry entry) async {
+      state[entry.key] =
+          await _read(httpServiceProvider).getGameCards(entry.key);
+    });
     state = {...state};
+  }
+
+  void onDispose() {
+    state.forEach((key, value) => value = <GameCard>[]);
   }
 }
