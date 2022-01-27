@@ -67,27 +67,30 @@ class PlayerEntryScreen extends ConsumerWidget {
             ),
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            if (_playerProvider.length >= 2)
-              ElevatedButton.icon(
-                onPressed: () =>
-                    AutoRouter.of(context).navigate(const PackSelectionRoute()),
-                icon: const FaIcon(FontAwesomeIcons.play),
-                label: const Text('Play'),
-              )
-            else
-              const ElevatedButton(
-                  onPressed: null, child: Text('Not enough players')),
-            TextButton.icon(
-                onPressed: () => showModalBottomSheet(
-                    isScrollControlled: true,
-                    context: context,
-                    builder: (context) => EntryBottomSheet()),
-                icon: const FaIcon(FontAwesomeIcons.plus),
-                label: const Text('Add Player')),
-          ],
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              if (_playerProvider.length >= 2)
+                ElevatedButton.icon(
+                  onPressed: () => AutoRouter.of(context)
+                      .navigate(const PackSelectionRoute()),
+                  icon: const FaIcon(FontAwesomeIcons.play),
+                  label: const Text('Play'),
+                )
+              else
+                const ElevatedButton(
+                    onPressed: null, child: Text('Not enough players')),
+              TextButton.icon(
+                  onPressed: () => showModalBottomSheet(
+                      isScrollControlled: true,
+                      context: context,
+                      builder: (context) => EntryBottomSheet()),
+                  icon: const FaIcon(FontAwesomeIcons.plus),
+                  label: const Text('Add Player')),
+            ],
+          ),
         ),
       ],
     );
