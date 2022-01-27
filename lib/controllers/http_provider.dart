@@ -8,7 +8,6 @@ import 'package:zuupen/enums/enums.dart';
 final dioProvider = Provider<Dio>((ref) {
   final options = CacheOptions(
     store: MemCacheStore(),
-    policy: CachePolicy.refresh,
   );
   return Dio()..interceptors.add(DioCacheInterceptor(options: options));
 });
