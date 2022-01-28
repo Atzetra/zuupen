@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:zuupen/controllers/database_provider.dart';
-import 'package:zuupen/controllers/http_provider.dart';
 import 'package:zuupen/controllers/packs_controller.dart';
 import 'package:zuupen/routes/router.gr.dart';
 
@@ -11,32 +10,19 @@ import '../enums/enums.dart';
 import '../theme/text_styles.dart';
 import '../widgets/scaffold_base.dart';
 
-class PackSelectionScreen extends ConsumerWidget {
+class PackSelectionScreen extends HookConsumerWidget {
   const PackSelectionScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _response = ref.watch(responseProvider);
+    final _database = ref.watch(databaseProvider);
     return ScaffoldBase(
       children: [
         const Text(
           'Select Deck',
           style: CustomTextStyles.header,
         ),
-        _response.when(
-          loading: () => const Center(child: CircularProgressIndicator()),
-          error: (error, stackTrace) => const MidColumn(),
-          data: (data) {
-            if (!data) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text("Couldn't retrieve the cards."),
-                ),
-              );
-            }
-            return const MidColumn();
-          },
-        ),
+        const MidColumn(),
         const SizedBox(
           height: 10,
         ),
