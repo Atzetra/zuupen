@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zuupen/enums/enums.dart';
 import 'package:zuupen/models/gamecard.dart';
@@ -35,11 +35,9 @@ class HttpApiServiceImpl implements HttpService {
     if (_connectivityResult == ConnectivityResult.wifi ||
         _connectivityResult == ConnectivityResult.mobile ||
         _connectivityResult == ConnectivityResult.ethernet) {
-      final dio = Dio();
-      final response = await dio.get(_apiKeys[category]!);
-      final returner = (response.data as List)
-          .map((json) => GameCard.fromJson(json))
-          .toList();
+      final url = Uri.parse(_apiKeys[category]!);
+      final response = await http.get(url);
+      final returner = jsonDecode(response.body);
       _sharedPrefs.setString(category.toString(), jsonEncode(returner));
     }
     final List fetch =
