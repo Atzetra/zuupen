@@ -1,10 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-enum Gender {
-  male,
-  female,
-}
-
 enum GameCategory {
   gettingStarted,
   raisingTheStakes,
@@ -27,4 +22,10 @@ enum CardType {
   caliente,
   @JsonValue('dual')
   dual,
+}
+
+enum FeedbackStatus {
+  succes,
+  noInternet,
+  unknown,
 }
