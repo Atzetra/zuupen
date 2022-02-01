@@ -2,9 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:zuupen/controllers/database_provider.dart';
-import 'package:zuupen/controllers/packs_controller.dart';
-import 'package:zuupen/routes/router.gr.dart';
+import '../controllers/database_provider.dart';
+import '../controllers/packs_controller.dart';
+import '../routes/router.gr.dart';
 
 import '../enums/enums.dart';
 import '../theme/text_styles.dart';

@@ -1,5 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:zuupen/services/api_endpoints.dart';
+import '../services/api_endpoints.dart';
 import '../enums/enums.dart';
 import '../models/gamecard.dart';
 

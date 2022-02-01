@@ -2,13 +2,13 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:zuupen/controllers/database_provider.dart';
-import 'package:zuupen/controllers/packs_controller.dart';
-import 'package:zuupen/controllers/player_controller.dart';
 
 import '../constants/extensions/string_extensions.dart';
 import '../enums/enums.dart';
 import '../models/gamecard.dart';
+import 'database_provider.dart';
+import 'packs_controller.dart';
+import 'player_controller.dart';
 
 final cardsProvider =
     ChangeNotifierProvider<CardsController>((ref) => CardsController(ref));

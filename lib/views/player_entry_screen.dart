@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:zuupen/routes/router.gr.dart';
+import '../routes/router.gr.dart';
 import '../controllers/player_controller.dart';
 
 import '../widgets/entry_bottom_sheet.dart';

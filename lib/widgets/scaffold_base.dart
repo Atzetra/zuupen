@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:zuupen/routes/router.gr.dart';
+import '../routes/router.gr.dart';
 
 class ScaffoldBase extends StatelessWidget {
   final List<Widget>? children;

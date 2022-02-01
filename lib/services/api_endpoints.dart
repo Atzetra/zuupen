@@ -5,8 +5,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:zuupen/enums/enums.dart';
-import 'package:zuupen/models/gamecard.dart';
+import '../enums/enums.dart';
+import '../models/gamecard.dart';
 
 final httpServiceProvider = Provider<HttpService>((ref) {
   return HttpApiServiceImpl(ref);
