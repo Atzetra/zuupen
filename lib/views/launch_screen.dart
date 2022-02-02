@@ -36,11 +36,13 @@ class LaunchScreen extends StatelessWidget {
               ),
               FutureBuilder(
                 future: getInfo(),
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                builder: (BuildContext context,
+                    AsyncSnapshot<PackageInfo> snapshot) {
                   return IconButton(
                     onPressed: () => showAboutDialog(
                         context: context,
-                        applicationVersion: snapshot.data,
+                        applicationVersion: snapshot.data?.version,
+                        applicationName: snapshot.data?.appName,
                         applicationLegalese: '© Enzo Sastrokarijo',
                         applicationIcon:
                             const FaIcon(FontAwesomeIcons.wineGlass),
@@ -63,8 +65,7 @@ class LaunchScreen extends StatelessWidget {
     );
   }
 
-  Future<String> getInfo() async {
-    final _packageInfo = await PackageInfo.fromPlatform();
-    return _packageInfo.version;
+  Future<PackageInfo> getInfo() async {
+    return PackageInfo.fromPlatform();
   }
 }
