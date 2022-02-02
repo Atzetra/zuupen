@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import '../enums/enums.dart';
 
 part 'gamecard.freezed.dart';

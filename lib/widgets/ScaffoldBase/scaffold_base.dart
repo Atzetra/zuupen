@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:zuupen/routes/router.gr.dart';
+import 'scaffold_base_controller.dart';
 
 class ScaffoldBase extends StatelessWidget {
   final List<Widget>? children;
@@ -31,13 +31,22 @@ class ScaffoldBase extends StatelessWidget {
               top: 0.0,
               right: 0.0,
               child: PopupMenuButton(
-                onSelected: (_) =>
-                    AutoRouter.of(context).push(const FeedbackRoute()),
+                onSelected: (value) async {
+                  await ScaffoldBaseController()
+                      .popUpHandler(context, value as String);
+                },
                 itemBuilder: (_) => <PopupMenuItem>[
                   const PopupMenuItem(
                     value: 'feedback',
                     child: Text(
                       'Send Feedback',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                  const PopupMenuItem(
+                    value: 'suggestion',
+                    child: Text(
+                      'Send a Card Suggestion',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),

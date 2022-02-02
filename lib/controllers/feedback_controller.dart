@@ -8,10 +8,10 @@ final feedbackProvider =
 
 class FeedbackController extends ChangeNotifier {
   final _formKey = GlobalKey<FormState>();
-  final textController = TextEditingController();
   final items = ['General Feedback', 'Card Suggestion'];
   String dropdownValue = 'General Feedback';
   bool _isLoading = false;
+
   GlobalKey<FormState> get formKey => _formKey;
   bool get isLoading => _isLoading;
 
@@ -20,25 +20,18 @@ class FeedbackController extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> submitFeedback() async {
+  Future<void> submitFeedback(String text) async {
     _isLoading = true;
     notifyListeners();
-    final _feedbackText = textController.text;
-    if (dropdownValue == 'General Feedback') {
-      final CollectionReference _feedback =
-          FirebaseFirestore.instance.collection('generalFeedback');
+    final _dateTime = DateTime.now();
+    final _feedbackText = text;
+    final CollectionReference _feedback =
+        FirebaseFirestore.instance.collection('cardSuggestions');
 
-      _feedback.add({
-        'feedbackText': _feedbackText,
-      }).then((value) => null);
-    } else {
-      final CollectionReference _feedback =
-          FirebaseFirestore.instance.collection('cardSuggestions');
-
-      _feedback.add({
-        'feedbackText': _feedbackText,
-      }).then((value) => null);
-    }
+    _feedback.add({
+      'datetime': _dateTime.toString(),
+      'feedbackText': _feedbackText,
+    }).then((value) => null);
     _isLoading = false;
     notifyListeners();
   }

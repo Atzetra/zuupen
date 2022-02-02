@@ -2,10 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:zuupen/controllers/cards_controller.dart';
-import 'package:zuupen/models/gamecard.dart';
-import 'package:zuupen/routes/router.gr.dart';
+
 import '../enums/enums.dart';
+import '../models/gamecard.dart';
+import '../routes/router.gr.dart';
+import 'cards_controller.dart';
 
 final gameProvider = ChangeNotifierProvider<GameController>((ref) {
   return GameController(ref);

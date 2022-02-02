@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:zuupen/controllers/cards_controller.dart';
+
+import '../controllers/cards_controller.dart';
 import '../controllers/game_controller.dart';
-import '../widgets/scaffold_base.dart';
+import '../widgets/ScaffoldBase/scaffold_base.dart';
 
 class GameScreen extends HookConsumerWidget {
   const GameScreen({Key? key}) : super(key: key);
