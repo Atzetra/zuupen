@@ -2,11 +2,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import '../routes/router.gr.dart';
-import '../controllers/player_controller.dart';
 
+import '../controllers/player_controller.dart';
+import '../routes/router.gr.dart';
+import '../widgets/ScaffoldBase/scaffold_base.dart';
 import '../widgets/entry_bottom_sheet.dart';
-import '../widgets/scaffold_base.dart';
 
 class PlayerEntryScreen extends ConsumerWidget {
   static const String id = '/PlayerEntry';

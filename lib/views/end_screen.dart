@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+
 import '../theme/text_styles.dart';
 
 class EndScreen extends StatelessWidget {

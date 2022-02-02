@@ -2,13 +2,13 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 import '../controllers/database_provider.dart';
 import '../controllers/packs_controller.dart';
-import '../routes/router.gr.dart';
-
 import '../enums/enums.dart';
+import '../routes/router.gr.dart';
 import '../theme/text_styles.dart';
-import '../widgets/scaffold_base.dart';
+import '../widgets/ScaffoldBase/scaffold_base.dart';
 
 class PackSelectionScreen extends HookConsumerWidget {
   const PackSelectionScreen({Key? key}) : super(key: key);

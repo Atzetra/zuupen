@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import '../routes/router.gr.dart';
 
-import '../widgets/scaffold_base.dart';
+import '../widgets/ScaffoldBase/scaffold_base.dart';
 
 class LaunchScreen extends StatelessWidget {
   static const String id = '/LaunchScreen';
