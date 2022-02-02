@@ -36,7 +36,7 @@ class FeedbackScreen extends HookConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      'Feedback',
+                      'Card Suggestion',
                       style: CustomTextStyles.header,
                     ),
                     Padding(
@@ -47,17 +47,7 @@ class FeedbackScreen extends HookConsumerWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text('Feedback type:'),
-                              DropdownButton(
-                                value: _feedbackProvider.dropdownValue,
-                                items: _feedbackProvider.items
-                                    .map(buildMenuItem)
-                                    .toList(),
-                                onChanged: (String? value) {
-                                  _feedbackProvider.dropdownChanger(value);
-                                },
-                              ),
-                              const Text('Feedback:'),
+                              const Text('Card Suggestion:'),
                               TextFormField(
                                 controller: _textController,
                                 validator: (value) {
@@ -69,8 +59,7 @@ class FeedbackScreen extends HookConsumerWidget {
                                     AutovalidateMode.onUserInteraction,
                                 maxLines: 3,
                                 decoration: const InputDecoration(
-                                  hintText:
-                                      'Enter your feedback or card suggestions here.',
+                                  hintText: 'Enter your card suggestion here.',
                                 ),
                               ),
                             ],
@@ -87,16 +76,17 @@ class FeedbackScreen extends HookConsumerWidget {
                         onPressed: () async {
                           if (_feedbackProvider.formKey.currentState!
                               .validate()) {
-                            await _feedbackProvider.submitFeedback();
+                            await _feedbackProvider
+                                .submitFeedback(_textController.text);
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
-                                content: Text('Feedback sent succesfully!'),
+                                content: Text('Suggestion sent succesfully!'),
                               ),
                             );
                           }
                         },
                         icon: const Icon(Icons.send),
-                        label: const Text('Send Feedback'),
+                        label: const Text('Send Suggestion'),
                         style: ElevatedButton.styleFrom(
                           minimumSize: const Size.fromHeight(50),
                         ),
@@ -105,7 +95,7 @@ class FeedbackScreen extends HookConsumerWidget {
                       height: 10,
                     ),
                     const Text(
-                      'Feedback given here will be sent and collected to my own server. Data entered here will only be used for improving the app.',
+                      'Suggestions given here will be sent and collected to my own server. Data entered here will only be used for improving the app.',
                       style: TextStyle(color: Colors.white38),
                     ),
                   ],
@@ -115,15 +105,4 @@ class FeedbackScreen extends HookConsumerWidget {
           )),
     );
   }
-
-  DropdownMenuItem<String> buildMenuItem(String item) => DropdownMenuItem(
-        value: item,
-        child: Text(
-          item,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          ),
-        ),
-      );
 }
