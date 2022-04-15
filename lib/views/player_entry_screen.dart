@@ -86,7 +86,7 @@ class PlayerEntryScreen extends ConsumerWidget {
                   onPressed: () => showModalBottomSheet(
                       isScrollControlled: true,
                       context: context,
-                      builder: (context) => EntryBottomSheet()),
+                      builder: (context) => const EntryBottomSheet()),
                   icon: const FaIcon(FontAwesomeIcons.plus),
                   label: const Text('Add Player')),
             ],
