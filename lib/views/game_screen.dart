@@ -41,6 +41,7 @@ class GameScreen extends HookConsumerWidget {
                   TextButton(
                     onPressed: () {
                       AutoRouter.of(context).navigate(const PlayerEntryRoute());
+                      Navigator.of(scopeContext).pop(false);
                     },
                     child: const Text('Yes'),
                   ),
