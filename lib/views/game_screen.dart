@@ -1,9 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../controllers/cards_controller.dart';
 import '../controllers/game_controller.dart';
+import '../routes/router.gr.dart';
 import '../widgets/ScaffoldBase/scaffold_base.dart';
 
 class GameScreen extends HookConsumerWidget {
@@ -20,7 +22,33 @@ class GameScreen extends HookConsumerWidget {
     }, const []);
 
     return WillPopScope(
-      onWillPop: () => backHandler(context),
+      onWillPop: () async {
+        bool _action = false;
+        await showDialog(
+            context: context,
+            builder: (scopeContext) {
+              return AlertDialog(
+                title: const Text('End Game?'),
+                content: const Text('Do you want to exit and end this game?'),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(scopeContext).pop(false);
+                    },
+                    child: const Text('No'),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      AutoRouter.of(context).navigate(const PlayerEntryRoute());
+                      Navigator.of(scopeContext).pop(false);
+                    },
+                    child: const Text('Yes'),
+                  ),
+                ],
+              );
+            });
+        return _action;
+      },
       child: GestureDetector(
         onTap: () => _gameProvider.nextCard(context),
         child: ScaffoldBase(

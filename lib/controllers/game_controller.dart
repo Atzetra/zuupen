@@ -107,7 +107,6 @@ Future<bool> backHandler(BuildContext context) async {
             TextButton(
               onPressed: () {
                 _action = false;
-                AutoRouter.of(context).pop();
               },
               child: const Text('No'),
             ),
