@@ -20,49 +20,55 @@ class PlayerEntryScreen extends ConsumerWidget {
       children: [
         Material(
           borderRadius: BorderRadius.circular(20),
-          child: Container(
-            decoration: BoxDecoration(
-                color: Theme.of(context).backgroundColor,
-                borderRadius: BorderRadius.circular(20)),
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 1),
-            width: MediaQuery.of(context).size.width,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Add Players',
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                  ),
-                  _playerProvider.isEmpty
-                      ? const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 10.0),
-                          child: Text('No Players Yet'),
-                        )
-                      : ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: _playerProvider.length,
-                          itemBuilder: (context, index) {
-                            return Row(
-                              children: [
-                                Text(_playerProvider[index].name),
-                                const Spacer(),
-                                TextButton(
-                                    onPressed: () {
-                                      ref
-                                          .read(playerProvider.notifier)
-                                          .removePlayer(index);
-                                    },
-                                    child: const Icon(
-                                      Icons.close,
-                                      color: Colors.red,
-                                    )),
-                              ],
-                            );
-                          },
-                        ),
-                ],
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxHeight: 300),
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Theme.of(context).backgroundColor,
+                  borderRadius: BorderRadius.circular(20)),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 1),
+              width: MediaQuery.of(context).size.width,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Add Players',
+                      style:
+                          TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+                    _playerProvider.isEmpty
+                        ? const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 10.0),
+                            child: Text('No Players Yet'),
+                          )
+                        : Expanded(
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: _playerProvider.length,
+                              itemBuilder: (context, index) {
+                                return Row(
+                                  children: [
+                                    Text(_playerProvider[index].name),
+                                    const Spacer(),
+                                    TextButton(
+                                        onPressed: () {
+                                          ref
+                                              .read(playerProvider.notifier)
+                                              .removePlayer(index);
+                                        },
+                                        child: const Icon(
+                                          Icons.close,
+                                          color: Colors.red,
+                                        )),
+                                  ],
+                                );
+                              },
+                            ),
+                          ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -86,7 +92,7 @@ class PlayerEntryScreen extends ConsumerWidget {
                   onPressed: () => showModalBottomSheet(
                       isScrollControlled: true,
                       context: context,
-                      builder: (context) => EntryBottomSheet()),
+                      builder: (context) => const EntryBottomSheet()),
                   icon: const FaIcon(FontAwesomeIcons.plus),
                   label: const Text('Add Player')),
             ],

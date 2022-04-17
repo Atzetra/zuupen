@@ -11,6 +11,8 @@
 .vscode
 .fvm
 *.env
+*.env_web
+*.env_app
 gamecards*.json
 
 # IntelliJ related
