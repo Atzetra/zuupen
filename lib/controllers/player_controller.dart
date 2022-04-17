@@ -10,8 +10,8 @@ class PlayerProvider extends StateNotifier<List<Player>> {
   PlayerProvider()
       : super([
           Player(name: 'Lotte'),
-          Player(name: 'Marlies'),
-          Player(name: 'Bruno'),
+          Player(name: 'Julia'),
+          Player(name: 'Ben'),
         ]);
 
   void addPlayer(String name) {
