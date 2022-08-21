@@ -61,7 +61,8 @@ class CardsController with ChangeNotifier {
     final toggledPacks = ref.watch(toggledPacksProvider);
     final databaseCards = ref.watch(databaseProvider);
     final players = ref.watch(playerProvider);
-    final selectedPack = toggledPacks.keys.firstWhere((element) => true);
+    final selectedPack = toggledPacks.keys
+        .firstWhere((element) => toggledPacks[element] == true);
 
     _pickBuffer.addAll(databaseCards[selectedPack]!);
     // Add all selected decks to card pile

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../enums/enums.dart';
@@ -18,5 +19,6 @@ class ToggledPacks extends StateNotifier<Map<GameCategory, bool>> {
     state.updateAll((key, value) => false);
     state.update(category, (value) => true);
     state = {...state};
+    debugPrint(state.toString());
   }
 }
