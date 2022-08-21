@@ -14,7 +14,7 @@ class EntryBottomSheet extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _controller = useTextEditingController();
+    final controller = useTextEditingController();
     return Padding(
       padding: MediaQuery.of(context).viewInsets,
       child: Container(
@@ -35,7 +35,7 @@ class EntryBottomSheet extends HookConsumerWidget {
                     key: _formKey,
                     child: TextFormField(
                       decoration: const InputDecoration(hintText: 'Name'),
-                      controller: _controller,
+                      controller: controller,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Enter a name';
@@ -50,8 +50,8 @@ class EntryBottomSheet extends HookConsumerWidget {
             ElevatedButton.icon(
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
-                  ref.read(playerProvider.notifier).addPlayer(_controller.text);
-                  _controller.clear();
+                  ref.read(playerProvider.notifier).addPlayer(controller.text);
+                  controller.clear();
                   AutoRouter.of(context).pop();
                 }
               },

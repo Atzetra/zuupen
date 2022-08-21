@@ -19,8 +19,8 @@ class PlayerProvider extends StateNotifier<List<Player>> {
   }
 
   void removePlayer(index) {
-    final List<Player> _buffer = state;
-    _buffer.removeAt(index);
-    state = [..._buffer];
+    final List<Player> buffer = state;
+    buffer.removeAt(index);
+    state = [...buffer];
   }
 }

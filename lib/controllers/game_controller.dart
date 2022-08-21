@@ -43,8 +43,8 @@ class GameController extends ChangeNotifier {
   }
 
   void populate() {
-    final _cards = ref.watch(cardsProvider);
-    _gameCards.addAll(_cards.finalCards);
+    final cards = ref.watch(cardsProvider);
+    _gameCards.addAll(cards.finalCards);
   }
 
   void nextCard(BuildContext context) {
@@ -96,7 +96,7 @@ class GameController extends ChangeNotifier {
 }
 
 Future<bool> backHandler(BuildContext context) async {
-  bool _action = false;
+  bool action = false;
   await showDialog(
       context: context,
       builder: (context) {
@@ -106,13 +106,13 @@ Future<bool> backHandler(BuildContext context) async {
           actions: [
             TextButton(
               onPressed: () {
-                _action = false;
+                action = false;
               },
               child: const Text('No'),
             ),
             TextButton(
               onPressed: () {
-                _action = true;
+                action = true;
                 AutoRouter.of(context).navigate(const PlayerEntryRoute());
               },
               child: const Text('Yes'),
@@ -120,5 +120,5 @@ Future<bool> backHandler(BuildContext context) async {
           ],
         );
       });
-  return _action;
+  return action;
 }

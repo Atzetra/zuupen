@@ -6,32 +6,32 @@ import '../../enums/enums.dart';
 
 class ScaffoldBaseModel {
   Future<FeedbackStatus> sendFeedback(UserFeedback feedback) async {
-    final _connectionStatus = await Connectivity().checkConnectivity();
-    final _dateTime = DateTime.now();
-    final String? _downloadUrl;
+    final connectionStatus = await Connectivity().checkConnectivity();
+    final dateTime = DateTime.now();
+    final String? downloadUrl;
 
-    if (_connectionStatus != ConnectivityResult.ethernet &&
-        _connectionStatus != ConnectivityResult.mobile &&
-        _connectionStatus != ConnectivityResult.wifi) {
+    if (connectionStatus != ConnectivityResult.ethernet &&
+        connectionStatus != ConnectivityResult.mobile &&
+        connectionStatus != ConnectivityResult.wifi) {
       return FeedbackStatus.noInternet;
     } else {
       try {
         await FirebaseStorage.instance
-            .ref('screenshots/${_dateTime.toUtc()}.png')
+            .ref('screenshots/${dateTime.toUtc()}.png')
             .putData(feedback.screenshot);
 
-        _downloadUrl = await FirebaseStorage.instance
-            .ref('screenshots/${_dateTime.toUtc()}.png')
+        downloadUrl = await FirebaseStorage.instance
+            .ref('screenshots/${dateTime.toUtc()}.png')
             .getDownloadURL();
 
-        final _firestore =
+        final firestore =
             FirebaseFirestore.instance.collection('generalFeedback');
 
-        await _firestore
+        await firestore
             .add({
-              'datetime': _dateTime.toString(),
+              'datetime': dateTime.toString(),
               'feedback': feedback.text,
-              'screenshot': _downloadUrl,
+              'screenshot': downloadUrl,
             })
             .then((value) => FeedbackStatus.succes)
             .catchError((error) => error);

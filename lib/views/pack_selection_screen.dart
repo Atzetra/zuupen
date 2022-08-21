@@ -15,7 +15,7 @@ class PackSelectionScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _database = ref.watch(databaseProvider);
+    // final database = ref.watch(databaseProvider);
     return ScaffoldBase(
       children: [
         const Text(
@@ -41,29 +41,29 @@ class MidColumn extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _database = ref.watch(databaseProvider);
+    final database = ref.watch(databaseProvider);
 
     return Column(
       children: [
         PackCard(
-          leading: const FaIcon(FontAwesomeIcons.cocktail),
+          leading: const FaIcon(FontAwesomeIcons.martiniGlass),
           title: const Text('Getting Started'),
           subtitle: Text(
-              'Let\'s get this party started.\n${_database[GameCategory.gettingStarted]!.length} cards'),
+              'Let\'s get this party started.\n${database[GameCategory.gettingStarted]!.length} cards'),
           gameCategory: GameCategory.gettingStarted,
         ),
         PackCard(
-          leading: const FaIcon(FontAwesomeIcons.diagnoses),
+          leading: const FaIcon(FontAwesomeIcons.personDotsFromLine),
           title: const Text('Raising The Stakes'),
           subtitle: Text(
-              'Time to go a step further.\n${_database[GameCategory.raisingTheStakes]!.length} cards'),
+              'Time to go a step further.\n${database[GameCategory.raisingTheStakes]!.length} cards'),
           gameCategory: GameCategory.raisingTheStakes,
         ),
         PackCard(
           leading: const FaIcon(FontAwesomeIcons.fire),
           title: const Text('Caliente'),
           subtitle: Text(
-              'Is starting to get hot in here.\n${_database[GameCategory.caliente]!.length} cards'),
+              'Is starting to get hot in here.\n${database[GameCategory.caliente]!.length} cards'),
           gameCategory: GameCategory.caliente,
         ),
       ],
@@ -87,7 +87,7 @@ class PackCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _packs = ref.watch(toggledPacksProvider);
+    final packs = ref.watch(toggledPacksProvider);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Material(
@@ -105,7 +105,7 @@ class PackCard extends ConsumerWidget {
               title: title,
               subtitle: subtitle,
               trailing: Checkbox(
-                value: _packs[gameCategory],
+                value: packs[gameCategory],
                 onChanged: (value) {
                   ref
                       .read(toggledPacksProvider.notifier)

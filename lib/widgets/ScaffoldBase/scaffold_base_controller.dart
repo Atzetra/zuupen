@@ -21,7 +21,6 @@ class ScaffoldBaseController {
               ),
             );
           } catch (e) {
-            print(e);
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(

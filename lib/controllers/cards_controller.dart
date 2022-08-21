@@ -39,53 +39,53 @@ class CardsController with ChangeNotifier {
   }
 
   void cardPopulator() {
-    final _players = ref.watch(playerProvider);
+    final players = ref.watch(playerProvider);
     // Get around the FUCKING annoying thing that shallow object copy isn't a
     // thing in Dart. Praise the Freezed package, may blessings be upon him
 
     // Add names
-    for (var _player in _players) {
-      _names.add(_player.name);
+    for (var player in players) {
+      _names.add(player.name);
     }
 
     // Get names into the decks
-    for (var _card in _cards) {
-      String _firstLine;
-      _firstLine = ruleParser(_card.firstLine, _card.players, _card.elements);
-      _firstLine = _firstLine.capitalizer();
-      _finalCards.add(_card.copyWith(firstLine: _firstLine));
+    for (var card in _cards) {
+      String firstLine;
+      firstLine = ruleParser(card.firstLine, card.players, card.elements);
+      firstLine = firstLine.capitalizer();
+      _finalCards.add(card.copyWith(firstLine: firstLine));
     }
   }
 
   void cardSeparator() {
-    final _toggledPacks = ref.watch(toggledPacksProvider);
-    final _databaseCards = ref.watch(databaseProvider);
-    final _players = ref.watch(playerProvider);
-    final _selectedPack = _toggledPacks.keys.firstWhere((element) => true);
+    final toggledPacks = ref.watch(toggledPacksProvider);
+    final databaseCards = ref.watch(databaseProvider);
+    final players = ref.watch(playerProvider);
+    final selectedPack = toggledPacks.keys.firstWhere((element) => true);
 
-    _pickBuffer.addAll(_databaseCards[_selectedPack]!);
+    _pickBuffer.addAll(databaseCards[selectedPack]!);
     // Add all selected decks to card pile
-    _pickBuffer.removeWhere((element) => element.players > _players.length);
+    _pickBuffer.removeWhere((element) => element.players > players.length);
 
-    for (var _card in _pickBuffer) {
-      switch (_card.cardType) {
+    for (var card in _pickBuffer) {
+      switch (card.cardType) {
         case CardType.rule:
-          _ruleCards.add(_card);
+          _ruleCards.add(card);
           break;
         case CardType.game:
-          _gameCards.add(_card);
+          _gameCards.add(card);
           break;
         case CardType.virus:
-          _virusCards.add(_card);
+          _virusCards.add(card);
           break;
         case CardType.bottomsUp:
-          _bottomsUpCards.add(_card);
+          _bottomsUpCards.add(card);
           break;
         case CardType.caliente:
-          _calienteCards.add(_card);
+          _calienteCards.add(card);
           break;
         case CardType.dual:
-          _dualCards.add(_card);
+          _dualCards.add(card);
           break;
         default:
           break;
@@ -113,81 +113,81 @@ class CardsController with ChangeNotifier {
     _dualCardPlacer((_dualCards.toList()..shuffle()).take(4).toList());
   }
 
-  void _dualCardPlacer(List<GameCard> _dualCards) {
-    final _random = Random();
-    for (var _card in _dualCards) {
-      final _insertIndex = _random.nextInt(_cards.length - 1);
-      final _secondCard = GameCard(
-          firstLine: _card.secondLine!,
+  void _dualCardPlacer(List<GameCard> dualCards) {
+    final random = Random();
+    for (var card in dualCards) {
+      final insertIndex = random.nextInt(_cards.length - 1);
+      final secondCard = GameCard(
+          firstLine: card.secondLine!,
           cardType: CardType.dual,
           players: 0,
           elements: 0);
       _cards
-        ..insert(_insertIndex, _card)
-        ..insert(_insertIndex + 1, _secondCard);
+        ..insert(insertIndex, card)
+        ..insert(insertIndex + 1, secondCard);
     }
   }
 
-  void _virusPlacer(List<GameCard> _virusses) {
-    final _random = Random();
-    for (var _card in _virusses) {
-      final _firstInsertIndex = _random.nextInt(_cards.length - 1);
-      final _secondInsertIndex = _firstInsertIndex +
+  void _virusPlacer(List<GameCard> virusses) {
+    final random = Random();
+    for (var card in virusses) {
+      final firstInsertIndex = random.nextInt(_cards.length - 1);
+      final secondInsertIndex = firstInsertIndex +
           1 +
-          _random.nextInt(_cards.length - _firstInsertIndex);
-      final _virusEnd = GameCard(
-          firstLine: _card.secondLine!,
+          random.nextInt(_cards.length - firstInsertIndex);
+      final virusEnd = GameCard(
+          firstLine: card.secondLine!,
           cardType: CardType.virus,
           players: 0,
           elements: 0);
       _cards
-        ..insert(_firstInsertIndex, _card)
-        ..insert(_secondInsertIndex, _virusEnd);
+        ..insert(firstInsertIndex, card)
+        ..insert(secondInsertIndex, virusEnd);
     }
   }
 
   //String parser
-  String ruleParser(String _rule, int _players, int _elements) {
-    _rule = nameReplace(_rule, _players);
-    _rule = takeDecider(_rule);
-    _rule = sipDecider(_rule, _elements);
-    return _rule;
+  String ruleParser(String rule, int players, int elements) {
+    rule = nameReplace(rule, players);
+    rule = takeDecider(rule);
+    rule = sipDecider(rule, elements);
+    return rule;
   }
 
   // Replaces '{{}}' fields with names.
-  String nameReplace(String _rule, int _players) {
-    final Random _random = Random();
+  String nameReplace(String rule, int players) {
+    final Random random = Random();
     // Reminder for self: using '=' for lists doesn't work...
-    List<String> _replaceNames = [..._names];
-    String _name;
+    List<String> replaceNames = [..._names];
+    String name;
 
-    for (var i = 0; i < _players; i++) {
-      int choice = _random.nextInt(_replaceNames.length);
+    for (var i = 0; i < players; i++) {
+      int choice = random.nextInt(replaceNames.length);
 
-      _name = _replaceNames[choice];
-      _replaceNames.removeAt(choice);
-      _rule = _rule.replaceAll("{{$i}}", _name);
+      name = replaceNames[choice];
+      replaceNames.removeAt(choice);
+      rule = rule.replaceAll("{{$i}}", name);
     }
-    return _rule;
+    return rule;
   }
 
-  String takeDecider(String _rule) {
+  String takeDecider(String rule) {
     final List<String> choice = [
       "drink {[0]} time",
       "give out {[0]} drink",
     ];
-    Random _rng = Random();
+    Random rng = Random();
     // Detrimine if to drink or to give out.
-    _rule = _rule.replaceAll("{{drink}}", choice[_rng.nextInt(choice.length)]);
-    return _rule;
+    rule = rule.replaceAll("{{drink}}", choice[rng.nextInt(choice.length)]);
+    return rule;
   }
 
-  String sipDecider(String _rule, int _elements) {
-    Random _rng = Random();
+  String sipDecider(String rule, int elements) {
+    Random rng = Random();
 
-    for (var i = 0; i < _elements; i++) {
+    for (var i = 0; i < elements; i++) {
       // Random sips between 1 and 5, 6 is exclusive.
-      final _shuffledistribution = [
+      final shuffledistribution = [
         1,
         1,
         1,
@@ -208,16 +208,16 @@ class CardsController with ChangeNotifier {
         5,
         6,
       ];
-      int sips = (_shuffledistribution.toList()..shuffle())
-          .elementAt(_rng.nextInt(_shuffledistribution.length));
-      _rule = _rule.replaceAll("{[$i]}", sips.toString());
+      int sips = (shuffledistribution.toList()..shuffle())
+          .elementAt(rng.nextInt(shuffledistribution.length));
+      rule = rule.replaceAll("{[$i]}", sips.toString());
 //       print(rule);
       if (sips != 1) {
-        _rule = _rule.replaceAll("$sips time", "$sips times");
-        _rule = _rule.replaceAll("$sips drink", "$sips drinks");
-        _rule = _rule.replaceAll("$sips sip", "$sips sips");
+        rule = rule.replaceAll("$sips time", "$sips times");
+        rule = rule.replaceAll("$sips drink", "$sips drinks");
+        rule = rule.replaceAll("$sips sip", "$sips sips");
       }
     }
-    return _rule;
+    return rule;
   }
 }

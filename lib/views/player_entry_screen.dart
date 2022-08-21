@@ -2,8 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:zuupen/controllers/player_controller.dart';
 
-import '../controllers/player_controller.dart';
 import '../routes/router.gr.dart';
 import '../widgets/ScaffoldBase/scaffold_base.dart';
 import '../widgets/entry_bottom_sheet.dart';
@@ -15,7 +15,7 @@ class PlayerEntryScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _playerProvider = ref.watch(playerProvider);
+    final playerModel = ref.watch(playerProvider);
     return ScaffoldBase(
       children: [
         Material(
@@ -38,7 +38,7 @@ class PlayerEntryScreen extends ConsumerWidget {
                       style:
                           TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                     ),
-                    _playerProvider.isEmpty
+                    playerModel.isEmpty
                         ? const Padding(
                             padding: EdgeInsets.symmetric(vertical: 10.0),
                             child: Text('No Players Yet'),
@@ -46,11 +46,11 @@ class PlayerEntryScreen extends ConsumerWidget {
                         : Expanded(
                             child: ListView.builder(
                               shrinkWrap: true,
-                              itemCount: _playerProvider.length,
+                              itemCount: playerModel.length,
                               itemBuilder: (context, index) {
                                 return Row(
                                   children: [
-                                    Text(_playerProvider[index].name),
+                                    Text(playerModel[index].name),
                                     const Spacer(),
                                     TextButton(
                                         onPressed: () {
@@ -78,7 +78,7 @@ class PlayerEntryScreen extends ConsumerWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              if (_playerProvider.length >= 2)
+              if (playerModel.length >= 2)
                 ElevatedButton.icon(
                   onPressed: () => AutoRouter.of(context)
                       .navigate(const PackSelectionRoute()),

@@ -2,9 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:zuupen/controllers/game_controller.dart';
 
 import '../controllers/cards_controller.dart';
-import '../controllers/game_controller.dart';
 import '../routes/router.gr.dart';
 import '../widgets/ScaffoldBase/scaffold_base.dart';
 
@@ -13,17 +13,17 @@ class GameScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _gameProvider = ref.watch(gameProvider);
-    final _cardsController = ref.watch(cardsProvider);
+    final gameModel = ref.watch(gameProvider);
+    final cardsController = ref.watch(cardsProvider);
     useEffect(() {
-      _cardsController.onInit();
-      _gameProvider.onInit();
-      return _gameProvider.onClose;
+      cardsController.onInit();
+      gameModel.onInit();
+      return gameModel.onClose;
     }, const []);
 
     return WillPopScope(
       onWillPop: () async {
-        bool _action = false;
+        bool action = false;
         await showDialog(
             context: context,
             builder: (scopeContext) {
@@ -47,21 +47,21 @@ class GameScreen extends HookConsumerWidget {
                 ],
               );
             });
-        return _action;
+        return action;
       },
       child: GestureDetector(
-        onTap: () => _gameProvider.nextCard(context),
+        onTap: () => gameModel.nextCard(context),
         child: ScaffoldBase(
-          backgroundColor: _gameProvider.cardColor,
+          backgroundColor: gameModel.cardColor,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              _gameProvider.categoryText,
+              gameModel.categoryText,
               style: const TextStyle(color: Colors.white, fontSize: 40),
             ),
             const SizedBox(height: 10),
             Text(
-              _gameProvider.cardText,
+              gameModel.cardText,
               textAlign: TextAlign.center,
               style: const TextStyle(
                 color: Colors.white,

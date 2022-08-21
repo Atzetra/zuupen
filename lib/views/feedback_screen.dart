@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:zuupen/controllers/feedback_controller.dart';
 
-import '../controllers/feedback_controller.dart';
 import '../theme/text_styles.dart';
 
 class FeedbackScreen extends HookConsumerWidget {
@@ -11,14 +11,14 @@ class FeedbackScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _feedbackProvider = ref.watch(feedbackProvider);
-    final _textController = useTextEditingController();
+    final feedbackModel = ref.watch(feedbackProvider);
+    final textController = useTextEditingController();
     return GestureDetector(
       onTap: () {
-        final _currentFocus = FocusScope.of(context);
+        final currentFocus = FocusScope.of(context);
 
-        if (!_currentFocus.hasPrimaryFocus) {
-          _currentFocus.unfocus();
+        if (!currentFocus.hasPrimaryFocus) {
+          currentFocus.unfocus();
         }
       },
       child: Scaffold(
@@ -30,7 +30,7 @@ class FeedbackScreen extends HookConsumerWidget {
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Form(
-                key: _feedbackProvider.formKey,
+                key: feedbackModel.formKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,11 +49,12 @@ class FeedbackScreen extends HookConsumerWidget {
                             children: [
                               const Text('Card Suggestion:'),
                               TextFormField(
-                                controller: _textController,
+                                controller: textController,
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return "Can't be empty";
                                   }
+                                  return null;
                                 },
                                 autovalidateMode:
                                     AutovalidateMode.onUserInteraction,
@@ -67,17 +68,16 @@ class FeedbackScreen extends HookConsumerWidget {
                         ),
                       ),
                     ),
-                    if (_feedbackProvider.isLoading)
+                    if (feedbackModel.isLoading)
                       const Center(
                         child: CircularProgressIndicator(),
                       )
                     else
                       ElevatedButton.icon(
                         onPressed: () async {
-                          if (_feedbackProvider.formKey.currentState!
-                              .validate()) {
-                            await _feedbackProvider
-                                .submitFeedback(_textController.text);
+                          if (feedbackModel.formKey.currentState!.validate()) {
+                            await feedbackModel
+                                .submitFeedback(textController.text);
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                 content: Text('Suggestion sent succesfully!'),

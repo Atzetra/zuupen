@@ -31,18 +31,18 @@ class HttpApiServiceImpl implements HttpService {
 
   @override
   Future<List<GameCard>> getGameCards(GameCategory category) async {
-    final _sharedPrefs = await SharedPreferences.getInstance();
-    final _connectivityResult = await (Connectivity().checkConnectivity());
-    if (_connectivityResult == ConnectivityResult.wifi ||
-        _connectivityResult == ConnectivityResult.mobile ||
-        _connectivityResult == ConnectivityResult.ethernet) {
+    final sharedPrefs = await SharedPreferences.getInstance();
+    final connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.wifi ||
+        connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.ethernet) {
       final url = Uri.parse(_apiKeys[category]!);
       final response = await http.get(url);
       final returner = jsonDecode(response.body);
-      _sharedPrefs.setString(category.toString(), jsonEncode(returner));
+      sharedPrefs.setString(category.toString(), jsonEncode(returner));
     }
     final List fetch =
-        await jsonDecode(_sharedPrefs.getString(category.toString())!);
+        await jsonDecode(sharedPrefs.getString(category.toString())!);
     return fetch.map((e) => GameCard.fromJson(e)).toList();
   }
 }

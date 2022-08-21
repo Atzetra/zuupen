@@ -23,14 +23,14 @@ class FeedbackController extends ChangeNotifier {
   Future<void> submitFeedback(String text) async {
     _isLoading = true;
     notifyListeners();
-    final _dateTime = DateTime.now();
-    final _feedbackText = text;
-    final CollectionReference _feedback =
+    final dateTime = DateTime.now();
+    final feedbackText = text;
+    final CollectionReference feedback =
         FirebaseFirestore.instance.collection('cardSuggestions');
 
-    _feedback.add({
-      'datetime': _dateTime.toString(),
-      'feedbackText': _feedbackText,
+    feedback.add({
+      'datetime': dateTime.toString(),
+      'feedbackText': feedbackText,
     }).then((value) => null);
     _isLoading = false;
     notifyListeners();
